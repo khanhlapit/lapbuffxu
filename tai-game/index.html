@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="icon" href="images/logo.png">
+<title>PTG LAPBUFFXU</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 95%;
+    max-width: 1100px;
+    text-align: center;
+    background: rgba(255,255,255,0.1);
+    padding: 25px;
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    color: white;
+}
+
+.logo {
+    width: 70px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+}
+
+/* GRID NGANG */
+.card-wrapper {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: rgba(255,255,255,0.1);
+    border-radius: 15px;
+    padding: 15px;
+    transition: 0.3s;
+    width: 250px;
+}
+
+.card:hover { transform: scale(1.05); }
+
+.card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    object-fit: cover;
+}
+
+.btn {
+    display: block;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.btn-vng { background: linear-gradient(45deg, #ff7a18, #ffb347); }
+.btn-global { background: linear-gradient(45deg, #00c9a7, #00e4ff); }
+.btn-key { background: black; }
+
+/* 🔥 VIDEO FIX */
+.tiktok-box {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.video-thumb {
+    position: relative;
+    cursor: pointer;
+    max-width: 320px; /* 👈 giới hạn size */
+    margin: 0 auto;   /* 👈 căn giữa */
+}
+
+.video-thumb img {
+    width: 100%;
+    border-radius: 15px;
+}
+
+.play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 40px;
+}
+
+/* KEY */
+.key-box {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 15px;
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+}
+
+/* SUPPORT */
+.support-wrapper {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+.support-btn {
+    width: 60px;
+    height: 60px;
+    background: #00c9a7;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 26px;
+    color: white;
+    cursor: pointer;
+}
+
+.support-menu {
+    display: none;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.support-menu a {
+    text-decoration: none;
+    color: white;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.zalo { background: #0068ff; }
+.tele { background: #229ED9; }
+
+/* Loading */
+.loading {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+}
+
+.spinner {
+    border: 5px solid rgba(255,255,255,0.2);
+    border-top: 5px solid white;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <img src="images/logo.png" class="logo">
+    <h2>🎮 Chọn phiên bản</h2>
+
+    <div class="card-wrapper">
+
+        <div class="card">
+            <img src="images/vng.png">
+            <h3>Play Together VNG</h3>
+            <a href="#" class="btn btn-vng" onclick="startDownload('vng')">Tải ngay</a>
+        </div>
+
+        <div class="card">
+            <img src="images/global.png">
+            <h3>Play Together Global</h3>
+            <a href="#" class="btn btn-global" onclick="startDownload('global')">Tải ngay</a>
+        </div>
+
+        <div class="card">
+            <img src="images/module.png">
+            <h3>Module Giả Lập</h3>
+            <a href="#" class="btn btn-global" onclick="startDownload('module')">Tải ngay</a>
+        </div>
+
+    </div>
+
+    <!-- VIDEO -->
+    <div class="tiktok-box">
+        <h3>📺 Hướng dẫn cài đặt</h3>
+        <div class="video-thumb" onclick="openTikTok()">
+            <img src="images/thumb.jpg">
+            <div class="play-btn">▶</div>
+        </div>
+    </div>
+
+    <!-- KEY -->
+    <div class="key-box">
+        <h3>🎁 Nhận Key Miễn Phí</h3>
+        <a href="https://hackviet.io/free-key/gtb" class="btn btn-key">Lấy Key Ngay</a>
+    </div>
+
+</div>
+
+<!-- SUPPORT -->
+<div class="support-wrapper">
+    <div class="support-menu" id="menu">
+        <a href="https://zalo.me/0357971728" class="zalo" target="_blank">Zalo</a>
+        <a href="https://t.me/sjxxtenn03" class="tele" target="_blank">Telegram</a>
+        <a href="https://www.tiktok.com/@khanhlap._03" class="tele" target="_blank">TikTok</a>
+    </div>
+    <div class="support-btn" onclick="toggleMenu()">💬</div>
+</div>
+
+<!-- Loading -->
+<div class="loading" id="loading">
+    <div class="spinner"></div>
+    <p>Đang xử lý...</p>
+</div>
+
+<script>
+function startDownload(type) {
+    document.getElementById("loading").style.display = "flex";
+
+    setTimeout(() => {
+        let link = "";
+
+        if (type === "vng") {
+            link = "https://www.mediafire.com/file/3rpkoow23j3d7ki/PLAY_TOGETHER_VNG_2.26.0.apk/file";
+        }
+
+        if (type === "global") {
+            link = "https://www.mediafire.com/file/on6ipzf1ibayny7/PLAY_TOGETHER_GLOBAL_2.26.0.apk/file";
+        }
+
+        if (type === "module") {
+            link = "https://www.mediafire.com/folder/400s18qtwsp0y/module";
+        }
+
+        window.location.href = link;
+    }, 2000);
+}
+
+function openTikTok() {
+    window.open("https://www.tiktok.com/@oo2oo6oo/video/7635247042012384519", "_blank");
+}
+
+function toggleMenu() {
+    const m = document.getElementById("menu");
+    m.style.display = m.style.display === "flex" ? "none" : "flex";
+}
+</script>
+
+</body>
+</html>

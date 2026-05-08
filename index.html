@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Lapbuffxu</title>
+<link rel="icon" href="images/logo.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background:#0b0f19;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* HERO */
+.hero {
+    text-align:center;
+    padding:80px 20px 40px;
+}
+
+.logo img {
+    height:50px;
+    border-radius:10px;
+}
+
+.hero h1 {
+    font-size:36px;
+    margin-top:15px;
+}
+
+.hero p {
+    color:#9ca3af;
+    margin-top:8px;
+}
+
+/* CARD */
+.card {
+    background:#111827;
+    border-radius:18px;
+    padding:30px;
+    border:1px solid #1f2937;
+    text-align:center;
+    transition:0.25s;
+}
+
+.card:hover {
+    transform:translateY(-6px);
+    border-color:#3b82f6;
+    box-shadow:0 10px 30px rgba(59,130,246,0.25);
+}
+
+.card h2, .card h3 {
+    margin-bottom:10px;
+}
+
+.card p {
+    color:#9ca3af;
+    font-size:14px;
+}
+
+.card a {
+    display:inline-block;
+    margin-top:15px;
+    padding:10px 20px;
+    background:#3b82f6;
+    border-radius:8px;
+    color:white;
+    text-decoration:none;
+    font-weight:600;
+}
+
+/* MAIN */
+.main {
+    max-width:900px;
+    margin:40px auto;
+    padding:40px;
+}
+
+.sub {
+    max-width:900px;
+    margin:0 auto;
+}
+
+/* CHAT FLOAT */
+.chat-box {
+    position:fixed;
+    bottom:20px;
+    right:20px;
+}
+
+.chat-main {
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    background:#2563eb;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    color:white;
+    cursor:pointer;
+}
+
+.chat-menu {
+    display:none;
+    flex-direction:column;
+    margin-bottom:10px;
+}
+
+.chat-menu a {
+    background:#111827;
+    color:white;
+    padding:10px 15px;
+    margin-top:8px;
+    border-radius:10px;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.chat-menu.active {
+    display:flex;
+}
+
+/* SNOW */
+.snowflake {
+    position:fixed;
+    top:-10px;
+    color:white;
+    font-size:10px;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<div class="hero">
+    <div class="logo">
+        <img src="images/logo.png">
+    </div>
+
+    <h1>Dịch vụ Play Together</h1>
+    <p>Tool miễn phí đang được dùng nhiều nhất hiện nay Hỗ trợ 24/7</p>
+</div>
+
+<!-- TOOL -->
+<div class="card main">
+    <h2>Tải Tool</h2>
+    <p>Miễn Phí - Update liên tục - Dễ sử dụng</p>
+    <a href="./tai-game/index.html">Tải ngay</a>
+</div>
+
+<!-- CÀY THUÊ -->
+<div class="card sub">
+    <h3>Cày Thuê</h3>
+    <p>Cày Nhanh - An toàn - Bảo Mật Cao</p>
+    <a href="./cay-thue/index.html">Xem ngay</a>
+</div>
+
+<!-- CHAT -->
+<div class="chat-box">
+
+    <div id="menu" class="chat-menu">
+        <a href="https://zalo.me/0344792471" target="_blank">Zalo</a>
+        <a href="https://t.me/yourtelegram" target="_blank">Telegram</a>
+    </div>
+
+    <div class="chat-main" onclick="toggleChat()">
+        💬
+    </div>
+
+</div>
+
+<!-- SNOW -->
+<script>
+function createSnow() {
+    const snow = document.createElement("div");
+    snow.classList.add("snowflake");
+    snow.innerHTML = "❄";
+
+    snow.style.left = Math.random() * window.innerWidth + "px";
+    snow.style.animationDuration = (3 + Math.random() * 5) + "s";
+    snow.style.opacity = Math.random();
+
+    document.body.appendChild(snow);
+
+    setTimeout(() => snow.remove(), 8000);
+}
+
+setInterval(createSnow, 120);
+
+/* CHAT TOGGLE */
+function toggleChat() {
+    document.getElementById("menu").classList.toggle("active");
+}
+</script>
+
+</body>
+</html>

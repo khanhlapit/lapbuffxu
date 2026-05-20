@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cày Thuê - LAPBUFFXU</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Inter,Arial,sans-serif;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:
+    radial-gradient(circle at top left,#2563eb55,transparent 30%),
+    radial-gradient(circle at top right,#9333ea55,transparent 30%),
+    linear-gradient(180deg,#020617,#0f172a 45%,#020617);
+  color:white;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+.bg-grid{
+  position:fixed;
+  inset:0;
+  background-image:
+    linear-gradient(#ffffff08 1px,transparent 1px),
+    linear-gradient(90deg,#ffffff08 1px,transparent 1px);
+  background-size:45px 45px;
+  z-index:0;
+  pointer-events:none;
+}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:999;
+  backdrop-filter:blur(16px);
+  background:#020617aa;
+  border-bottom:1px solid #ffffff14;
+}
+
+.nav{
+  max-width:1200px;
+  margin:auto;
+  padding:16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
+
+.logo{
+  font-size:28px;
+  font-weight:900;
+  background:linear-gradient(90deg,#60a5fa,#c084fc,#22c55e);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.nav a{
+  color:white;
+  text-decoration:none;
+  padding:12px 18px;
+  border-radius:16px;
+  background:linear-gradient(135deg,#2563eb,#9333ea);
+  font-weight:800;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:50px 16px;
+  position:relative;
+  z-index:1;
+}
+
+.hero{
+  text-align:center;
+  margin-bottom:50px;
+}
+
+.badge{
+  display:inline-block;
+  background:#22c55e1a;
+  color:#86efac;
+  border:1px solid #22c55e44;
+  padding:8px 14px;
+  border-radius:999px;
+  margin-bottom:18px;
+  font-size:14px;
+}
+
+.hero h1{
+  font-size:56px;
+  margin-bottom:15px;
+  background:linear-gradient(90deg,#60a5fa,#c084fc,#22c55e);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.hero p{
+  color:#cbd5e1;
+  font-size:18px;
+  line-height:1.7;
+}
+
+.section-title{
+  margin-bottom:22px;
+}
+
+.section-title h2{
+  font-size:34px;
+  margin-bottom:10px;
+}
+
+.section-title p{
+  color:#94a3b8;
+  line-height:1.6;
+}
+
+.service-section{
+  margin-bottom:55px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:20px;
+}
+
+.card{
+  background:linear-gradient(180deg,#ffffff12,#ffffff08);
+  border:1px solid #ffffff16;
+  border-radius:28px;
+  padding:24px;
+  box-shadow:0 18px 45px #0006;
+  transition:.25s;
+}
+
+.card:hover{
+  transform:translateY(-8px);
+  border-color:#60a5fa88;
+}
+
+.icon{
+  width:58px;
+  height:58px;
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  background:linear-gradient(135deg,#2563eb,#9333ea);
+  margin-bottom:18px;
+}
+
+.card h3{
+  font-size:22px;
+  margin-bottom:12px;
+}
+
+.price{
+  font-size:27px;
+  font-weight:900;
+  color:#86efac;
+  margin-bottom:10px;
+}
+
+.time{
+  color:#facc15;
+  font-weight:700;
+  margin-bottom:18px;
+}
+
+.btn{
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  padding:13px 20px;
+  border-radius:16px;
+  text-decoration:none;
+  font-weight:800;
+  color:white;
+  background:linear-gradient(135deg,#2563eb,#9333ea);
+  transition:.25s;
+}
+
+.btn:hover{
+  transform:translateY(-4px);
+}
+
+.note-box{
+  background:linear-gradient(180deg,#ffffff12,#ffffff08);
+  border:1px solid #ffffff16;
+  border-radius:28px;
+  padding:24px;
+  margin-bottom:55px;
+}
+
+.note-box h2{
+  margin-bottom:12px;
+}
+
+.note-box p{
+  color:#cbd5e1;
+  line-height:1.7;
+}
+
+/* CHAT SUPPORT */
+
+.chat-wrapper{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:9999;
+}
+
+.chat-toggle{
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  border:none;
+  cursor:pointer;
+  color:white;
+  font-size:28px;
+  background:linear-gradient(135deg,#2563eb,#9333ea);
+  box-shadow:0 12px 35px #2563eb88;
+  animation:chatFloat 2s infinite;
+}
+
+@keyframes chatFloat{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
+  100%{transform:translateY(0)}
+}
+
+.chat-box{
+  position:absolute;
+  right:0;
+  bottom:78px;
+  width:280px;
+  background:linear-gradient(180deg,#111827,#020617);
+  border:1px solid #ffffff18;
+  border-radius:24px;
+  padding:18px;
+  box-shadow:0 20px 60px #0009;
+  display:none;
+}
+
+.chat-box.active{
+  display:block;
+}
+
+.chat-box h3{
+  font-size:20px;
+  margin-bottom:8px;
+}
+
+.chat-box p{
+  color:#cbd5e1;
+  font-size:14px;
+  line-height:1.5;
+  margin-bottom:14px;
+}
+
+.chat-link{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border-radius:14px;
+  text-decoration:none;
+  color:white;
+  font-weight:800;
+  transition:.25s;
+}
+
+.chat-link.telegram{
+  background:linear-gradient(135deg,#229ED9,#2563eb);
+}
+
+.chat-link.zalo{
+  background:linear-gradient(135deg,#0068ff,#00b4ff);
+}
+
+.chat-link:hover{
+  transform:translateY(-3px);
+}
+
+footer{
+  margin-top:70px;
+  padding:30px;
+  text-align:center;
+  color:#94a3b8;
+  border-top:1px solid #ffffff14;
+}
+
+@media(max-width:600px){
+  .nav{
+    flex-direction:column;
+  }
+
+  .hero h1{
+    font-size:38px;
+  }
+
+  .chat-box{
+    width:260px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg-grid"></div>
+
+<header>
+  <div class="nav">
+    <div class="logo">LAPBUFFXU</div>
+    <a href="index.html">← Quay lại trang chủ</a>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="hero">
+    <div class="badge">● DỊCH VỤ CÀY THUÊ</div>
+    <h1>Bảng Giá Cày Thuê</h1>
+    <p>
+      Giá tham khảo cho các dịch vụ cày thuê.  
+      Muốn đặt dịch vụ vui lòng liên hệ admin qua Telegram hoặc Zalo.
+    </p>
+  </div>
+
+  <div class="note-box">
+    <h2>Lưu ý trước khi thuê</h2>
+    <p>
+      Thời gian hoàn thành có thể thay đổi tùy tình trạng tài khoản và yêu cầu của khách.
+      Vui lòng liên hệ admin để được báo chính xác trước khi đặt.
+    </p>
+  </div>
+
+  <section class="service-section">
+    <div class="section-title">
+      <h2>1. Cày tiền sao tặng thẻ</h2>
+      <p>Dịch vụ cày tiền sao theo gói.</p>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="icon">⭐</div>
+        <h3>500K tiền sao</h3>
+        <div class="price">50.000đ</div>
+        <div class="time">Thời gian: 3 ngày</div>
+        <a href="https://t.me/sjxxtenn03" target="_blank" class="btn">Liên hệ thuê</a>
+      </div>
+
+      <div class="card">
+        <div class="icon">⭐</div>
+        <h3>1 triệu tiền sao</h3>
+        <div class="price">100.000đ</div>
+        <div class="time">Thời gian: 5 ngày</div>
+        <a href="https://t.me/sjxxtenn03" target="_blank" class="btn">Liên hệ thuê</a>
+      </div>
+
+      <div class="card">
+        <div class="icon">⭐</div>
+        <h3>2 triệu tiền sao</h3>
+        <div class="price">185.000đ</div>
+        <div class="time">Thời gian: 8 ngày</div>
+        <a href="https://t.me/sjxxtenn03" target="_blank" class="btn">Liên hệ thuê</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="service-section">
+    <div class="section-title">
+      <h2>2. Thuê đập đá</h2>
+      <p>Dịch vụ treo đập đá và kim cương.</p>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="icon">⛏️</div>
+        <h3>Treo đập đá 1 ngày</h3>
+        <div class="price">50.000đ</div>
+        <div class="time">Thời gian: 1 ngày</div>
+        <a href="https://t.me/sjxxtenn03" target="_blank" class="btn">Liên hệ thuê</a>
+      </div>
+
+      <div class="card">
+        <div class="icon">⛏️</div>
+        <h3>Treo đập đá 2 ngày</h3>
+        <div class="price">80.000đ</div>
+        <div class="time">Thời gian: 2 ngày</div>
+        <a href="https://t.me/sjxxtenn03" target="_blank" class="btn">Liên hệ thuê</a>
+      </div>
+
+      <div class="card">
+        <div class="icon">💎</div>
+        <h3>Kim Cương Xanh</h3>
+        <div class="price">100.000đ</div>
+        <div class="time">Liên hệ để biết thời gian</div>
+        <a href="https://t.me/sjxxtenn03" target="_blank" class="btn">Liên hệ thuê</a>
+      </div>
+
+      <div class="card">
+        <div class="icon">💎</div>
+        <h3>Kim Cương Đỏ</h3>
+        <div class="price">100.000đ</div>
+        <div class="time">Liên hệ để biết thời gian</div>
+        <a href="https://t.me/sjxxtenn03" target="_blank" class="btn">Liên hệ thuê</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="service-section">
+    <div class="section-title">
+      <h2>3. Thuê câu rác</h2>
+      <p>Dịch vụ câu rác theo ngày hoặc theo yêu cầu.</p>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="icon">🎣</div>
+        <h3>Câu rác 1 ngày</h3>
+        <div class="price">50.000đ</div>
+        <div class="time">Thời gian: 1 ngày</div>
+        <a href="https://t.me/sjxxtenn03" target="_blank" class="btn">Liên hệ thuê</a>
+      </div>
+
+      <div class="card">
+        <div class="icon">🎣</div>
+        <h3>Câu rác theo yêu cầu</h3>
+        <div class="price">30.000đ</div>
+        <div class="time">1 loại</div>
+        <a href="https://t.me/sjxxtenn03" target="_blank" class="btn">Liên hệ thuê</a>
+      </div>
+
+      <div class="card">
+        <div class="icon">🎣</div>
+        <h3>Câu rác theo yêu cầu</h3>
+        <div class="price">110.000đ</div>
+        <div class="time">4 loại</div>
+        <a href="https://t.me/sjxxtenn03" target="_blank" class="btn">Liên hệ thuê</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="service-section">
+    <div class="section-title">
+      <h2>4. Câu cá hiếm</h2>
+      <p>Dịch vụ câu cá hiếm theo từng loại.</p>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="icon">🐢</div>
+        <h3>1 rùa Archelon thường</h3>
+        <div class="price">60.000đ</div>
+        <div class="time">Liên hệ để đặt</div>
+        <a href="https://t.me/sjxxtenn03" target="_blank" class="btn">Liên hệ thuê</a>
+      </div>
+
+      <div class="card">
+        <div class="icon">🐢</div>
+        <h3>1 rùa Archelon Vương Niệm</h3>
+        <div class="price">100.000đ</div>
+        <div class="time">Liên hệ để đặt</div>
+        <a href="https://t.me/sjxxtenn03" target="_blank" class="btn">Liên hệ thuê</a>
+      </div>
+
+      <div class="card">
+        <div class="icon">🐢</div>
+        <h3>4 rùa Archelon thường</h3>
+        <div class="price">200.000đ</div>
+        <div class="time">Liên hệ để đặt</div>
+        <a href="https://t.me/sjxxtenn03" target="_blank" class="btn">Liên hệ thuê</a>
+      </div>
+
+      <div class="card">
+        <div class="icon">🐋</div>
+        <h3>1 Livytan thường</h3>
+        <div class="price">200.000đ</div>
+        <div class="time">Liên hệ để đặt</div>
+        <a href="https://t.me/sjxxtenn03" target="_blank" class="btn">Liên hệ thuê</a>
+      </div>
+
+      <div class="card">
+        <div class="icon">🦈</div>
+        <h3>1 Mập Đỏ thường</h3>
+        <div class="price">200.000đ</div>
+        <div class="time">Liên hệ để đặt</div>
+        <a href="https://t.me/sjxxtenn03" target="_blank" class="btn">Liên hệ thuê</a>
+      </div>
+
+      <div class="card">
+        <div class="icon">🐋</div>
+        <h3>1 Livytan Vương Niệm</h3>
+        <div class="price">300.000đ</div>
+        <div class="time">Liên hệ để đặt</div>
+        <a href="https://t.me/sjxxtenn03" target="_blank" class="btn">Liên hệ thuê</a>
+      </div>
+
+      <div class="card">
+        <div class="icon">🦈</div>
+        <h3>1 Mập Đỏ Vương Niệm</h3>
+        <div class="price">300.000đ</div>
+        <div class="time">Liên hệ để đặt</div>
+        <a href="https://t.me/sjxxtenn03" target="_blank" class="btn">Liên hệ thuê</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  © 2026 LAPBUFFXU.SITE - All rights reserved.
+</footer>
+
+<div class="chat-wrapper">
+  <div class="chat-box" id="chatBox">
+    <h3>Liên hệ admin</h3>
+    <p>Chọn nền tảng để nhắn admin đặt dịch vụ cày thuê.</p>
+
+    <a href="https://t.me/sjxxtenn03" target="_blank" class="chat-link telegram">
+      Telegram
+    </a>
+
+    <a href="https://zalo.me/0344792471" target="_blank" class="chat-link zalo">
+      Zalo
+    </a>
+  </div>
+
+  <button class="chat-toggle" onclick="toggleChat()">💬</button>
+</div>
+
+<script>
+function toggleChat(){
+  document.getElementById("chatBox").classList.toggle("active");
+}
+</script>
+
+</body>
+</html>

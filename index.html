@@ -410,6 +410,57 @@ video{
   margin-bottom:16px;
 }
 
+.stock-badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:7px 12px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:900;
+  margin-bottom:14px;
+}
+
+.stock-badge.available{
+  background:#22c55e22;
+  color:#86efac;
+  border:1px solid #22c55e66;
+}
+
+.stock-badge.soldout{
+  background:#ef444422;
+  color:#fca5a5;
+  border:1px solid #ef444466;
+}
+
+.key-card.soldout{
+  opacity:.62;
+  filter:grayscale(.25);
+  position:relative;
+}
+
+.key-card.soldout:hover{
+  transform:none;
+  border-color:#ef444455;
+}
+
+.key-card.soldout .price{
+  color:#fca5a5;
+}
+
+.btn.disabled{
+  background:#475569!important;
+  color:#cbd5e1!important;
+  cursor:not-allowed;
+  pointer-events:none;
+  box-shadow:none!important;
+}
+
+.device-select:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+}
+
 .chat-wrapper{
   position:fixed;
   right:20px;
@@ -689,7 +740,7 @@ footer{
 
     <div class="grid">
 
-      <div class="card key-card" data-price="10000" data-max="2">
+      <div class="card key-card" data-price="10000" data-max="2" data-stock="available">
         <div class="icon">⚡</div>
         <h3>Key 1 ngày</h3>
         <div class="price">10.000đ</div>
@@ -699,7 +750,7 @@ footer{
         <a href="https://t.me/sjxxtenn03" target="_blank" class="btn primary">Liên hệ admin</a>
       </div>
 
-      <div class="card key-card" data-price="30000" data-max="5">
+      <div class="card key-card" data-price="30000" data-max="5" data-stock="soldout">
         <div class="icon">🔥</div>
         <h3>Key 3 ngày</h3>
         <div class="price">30.000đ</div>
@@ -709,7 +760,7 @@ footer{
         <a href="https://t.me/sjxxtenn03" target="_blank" class="btn primary">Liên hệ admin</a>
       </div>
 
-      <div class="card key-card" data-price="50000" data-max="5">
+      <div class="card key-card" data-price="50000" data-max="5" data-stock="available">
         <div class="icon">💎</div>
         <h3>Key 1 tuần</h3>
         <div class="price">50.000đ</div>
@@ -719,7 +770,7 @@ footer{
         <a href="https://t.me/sjxxtenn03" target="_blank" class="btn primary">Liên hệ admin</a>
       </div>
 
-      <div class="card key-card" data-price="80000" data-max="5">
+      <div class="card key-card" data-price="80000" data-max="5" data-stock="soldout">
         <div class="icon">🚀</div>
         <h3>Key 2 tuần</h3>
         <div class="price">80.000đ</div>
@@ -729,7 +780,7 @@ footer{
         <a href="https://t.me/sjxxtenn03" target="_blank" class="btn primary">Liên hệ admin</a>
       </div>
 
-      <div class="card key-card" data-price="120000" data-max="5">
+      <div class="card key-card" data-price="120000" data-max="5" data-stock="soldout">
         <div class="icon">👑</div>
         <h3>Key 3 tuần</h3>
         <div class="price">120.000đ</div>
@@ -739,7 +790,7 @@ footer{
         <a href="https://t.me/sjxxtenn03" target="_blank" class="btn primary">Liên hệ admin</a>
       </div>
 
-      <div class="card key-card" data-price="150000" data-max="5">
+      <div class="card key-card" data-price="150000" data-max="5" data-stock="available">
         <div class="icon">🏆</div>
         <h3>Key 1 tháng</h3>
         <div class="price">150.000đ</div>
@@ -795,9 +846,30 @@ document.addEventListener("DOMContentLoaded", () => {
   keyCards.forEach(card => {
     const basePrice = Number(card.dataset.price);
     const maxDevices = Number(card.dataset.max);
+    const stock = card.dataset.stock;
 
     const select = card.querySelector(".device-select");
     const totalText = card.querySelector(".total-price");
+    const contactBtn = card.querySelector("a.btn");
+
+    const badge = document.createElement("div");
+    badge.className = "stock-badge " + stock;
+    badge.textContent = stock === "available" ? "✅ Còn hàng" : "❌ Hết hàng";
+
+    const title = card.querySelector("h3");
+    title.insertAdjacentElement("afterend", badge);
+
+    if(stock === "soldout"){
+      card.classList.add("soldout");
+      select.disabled = true;
+      contactBtn.classList.remove("primary");
+      contactBtn.classList.add("disabled");
+      contactBtn.removeAttribute("href");
+      contactBtn.removeAttribute("target");
+      contactBtn.textContent = "Hết hàng";
+      totalText.innerHTML = "Tạm hết hàng";
+      return;
+    }
 
     for(let i = 1; i <= maxDevices; i++){
       const option = document.createElement("option");

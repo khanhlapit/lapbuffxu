@@ -38,6 +38,76 @@ body{
   pointer-events:none;
 }
 
+/* POPUP THÔNG BÁO ADMIN */
+.notice-overlay{
+  position:fixed;
+  inset:0;
+  background:#000000aa;
+  backdrop-filter:blur(8px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:99999;
+  padding:16px;
+}
+
+.notice-overlay.active{
+  display:flex;
+}
+
+.notice-box{
+  width:100%;
+  max-width:430px;
+  background:linear-gradient(180deg,#111827,#020617);
+  border:1px solid #ffffff22;
+  border-radius:28px;
+  padding:24px;
+  box-shadow:0 25px 80px #000;
+  animation:noticeZoom .25s ease;
+}
+
+@keyframes noticeZoom{
+  from{
+    opacity:0;
+    transform:scale(.9) translateY(20px);
+  }
+  to{
+    opacity:1;
+    transform:scale(1) translateY(0);
+  }
+}
+
+.notice-box h2{
+  font-size:26px;
+  margin-bottom:12px;
+  background:linear-gradient(90deg,#60a5fa,#c084fc,#22c55e);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.notice-box p{
+  color:#dbeafe;
+  line-height:1.7;
+  white-space:pre-line;
+  margin-bottom:20px;
+}
+
+.notice-close{
+  width:100%;
+  border:none;
+  padding:14px;
+  border-radius:16px;
+  color:white;
+  font-weight:900;
+  cursor:pointer;
+  background:linear-gradient(135deg,#2563eb,#9333ea);
+  box-shadow:0 12px 35px #2563eb55;
+}
+
+.notice-close:hover{
+  transform:translateY(-2px);
+}
+
 header{
   position:sticky;
   top:0;
@@ -589,6 +659,14 @@ footer{
 
 <div class="bg-grid"></div>
 
+<div class="notice-overlay" id="adminNotice">
+  <div class="notice-box">
+    <h2>📢 Thông báo</h2>
+    <p id="noticeText"></p>
+    <button class="notice-close" onclick="closeNotice()">Đóng</button>
+  </div>
+</div>
+
 <header>
   <div class="nav">
     <div class="logo">LAPBUFFXU</div>
@@ -695,11 +773,11 @@ footer{
         <h3>Cài cho iOS</h3>
         <p>Hỗ trợ cài đặt cho iPhone / iPad. Bấm vào nút bên dưới để cài </p>
 
-       <a href="https://ipas.cc/tf0ke8"
-   class="btn primary"
-   target="_blank">
-  Cài iOS
-</a>
+        <a href="https://ipas.cc/tf0ke8"
+           class="btn primary"
+           target="_blank">
+          Cài iOS
+        </a>
       </div>
     </div>
   </section>
@@ -840,7 +918,24 @@ footer{
 </div>
 
 <script>
+/* SỬA NỘI DUNG THÔNG BÁO ADMIN Ở ĐÂY */
+const ADMIN_NOTICE_MESSAGE = `Chào mừng bạn đến với LAPBUFFXU.SITE!
+
+Hiện tại shop đang hỗ trợ:
+- Key VIP
+- Tool Mobile / PC / iOS
+- Dịch vụ cày thuê
+
+
+Muốn mua key hoặc cần hỗ trợ thì bấm nút liên hệ admin nhé.`;
+
 document.addEventListener("DOMContentLoaded", () => {
+  const notice = document.getElementById("adminNotice");
+  const noticeText = document.getElementById("noticeText");
+
+  noticeText.textContent = ADMIN_NOTICE_MESSAGE;
+  notice.classList.add("active");
+
   const keyCards = document.querySelectorAll(".key-card");
 
   keyCards.forEach(card => {
@@ -896,6 +991,10 @@ document.addEventListener("DOMContentLoaded", () => {
     updatePrice();
   });
 });
+
+function closeNotice(){
+  document.getElementById("adminNotice").classList.remove("active");
+}
 
 function toggleChat(){
   document.getElementById("chatBox").classList.toggle("active");

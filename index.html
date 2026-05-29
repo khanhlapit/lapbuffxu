@@ -842,66 +842,66 @@ footer{
   <section id="vip">
     <div class="section-title">
       <h2>Bảng giá key VIP</h2>
-      <p class="note">Thêm 1 thiết bị = +50% giá gốc. Muốn mua key vui lòng liên hệ admin.</p>
+      <p class="note">Hiện tại chỉ bán key 1 thiết bị. Key nhiều thiết bị hiện không còn hàng. Muốn mua key vui lòng liên hệ admin.</p>
     </div>
 
     <div class="grid">
 
-      <div class="card key-card" data-price="10000" data-max="2" data-stock="available">
+      <div class="card key-card" data-price="10000" data-max="1" data-stock="available">
         <div class="icon">⚡</div>
         <h3>Key 1 ngày</h3>
         <div class="price">10.000đ</div>
-        <div class="key-info">Chọn số thiết bị:</div>
+        <div class="key-info">Loại: 1 thiết bị</div>
         <select class="device-select"></select>
         <div class="total-price"></div>
         <a href="https://t.me/sjxxtenn03" target="_blank" class="btn primary">Liên hệ admin</a>
       </div>
 
-      <div class="card key-card" data-price="30000" data-max="5" data-stock="soldout">
+      <div class="card key-card" data-price="30000" data-max="1" data-stock="soldout">
         <div class="icon">🔥</div>
         <h3>Key 3 ngày</h3>
         <div class="price">30.000đ</div>
-        <div class="key-info">Chọn số thiết bị:</div>
+        <div class="key-info">Loại: 1 thiết bị</div>
         <select class="device-select"></select>
         <div class="total-price"></div>
         <a href="https://t.me/sjxxtenn03" target="_blank" class="btn primary">Liên hệ admin</a>
       </div>
 
-      <div class="card key-card" data-price="50000" data-max="5" data-stock="available">
+      <div class="card key-card" data-price="50000" data-max="1" data-stock="available">
         <div class="icon">💎</div>
         <h3>Key 1 tuần</h3>
         <div class="price">50.000đ</div>
-        <div class="key-info">Chọn số thiết bị:</div>
+        <div class="key-info">Loại: 1 thiết bị</div>
         <select class="device-select"></select>
         <div class="total-price"></div>
         <a href="https://t.me/sjxxtenn03" target="_blank" class="btn primary">Liên hệ admin</a>
       </div>
 
-      <div class="card key-card" data-price="80000" data-max="5" data-stock="soldout">
+      <div class="card key-card" data-price="80000" data-max="1" data-stock="soldout">
         <div class="icon">🚀</div>
         <h3>Key 2 tuần</h3>
         <div class="price">80.000đ</div>
-        <div class="key-info">Chọn số thiết bị:</div>
+        <div class="key-info">Loại: 1 thiết bị</div>
         <select class="device-select"></select>
         <div class="total-price"></div>
         <a href="https://t.me/sjxxtenn03" target="_blank" class="btn primary">Liên hệ admin</a>
       </div>
 
-      <div class="card key-card" data-price="120000" data-max="5" data-stock="soldout">
+      <div class="card key-card" data-price="120000" data-max="1" data-stock="soldout">
         <div class="icon">👑</div>
         <h3>Key 3 tuần</h3>
         <div class="price">120.000đ</div>
-        <div class="key-info">Chọn số thiết bị:</div>
+        <div class="key-info">Loại: 1 thiết bị</div>
         <select class="device-select"></select>
         <div class="total-price"></div>
         <a href="https://t.me/sjxxtenn03" target="_blank" class="btn primary">Liên hệ admin</a>
       </div>
 
-      <div class="card key-card" data-price="150000" data-max="5" data-stock="available">
+      <div class="card key-card" data-price="150000" data-max="1" data-stock="available">
         <div class="icon">🏆</div>
         <h3>Key 1 tháng</h3>
         <div class="price">150.000đ</div>
-        <div class="key-info">Chọn số thiết bị:</div>
+        <div class="key-info">Loại: 1 thiết bị</div>
         <select class="device-select"></select>
         <div class="total-price"></div>
         <a href="https://t.me/sjxxtenn03" target="_blank" class="btn primary">Liên hệ admin</a>
@@ -957,6 +957,7 @@ THÔNG BÁO BẢO TRÌ:
 - Key Free iOS hiện đang bảo trì
 
 Hiện tại chỉ còn bản PC dùng được bình thường.
+Bảng giá key VIP hiện chỉ bán key 1 thiết bị, không còn bán key nhiều thiết bị.
 
 Muốn mua key hoặc cần hỗ trợ thì bấm nút liên hệ admin nhé.`;
 
@@ -971,7 +972,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   keyCards.forEach(card => {
     const basePrice = Number(card.dataset.price);
-    const maxDevices = Number(card.dataset.max);
     const stock = card.dataset.stock;
 
     const select = card.querySelector(".device-select");
@@ -985,6 +985,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const title = card.querySelector("h3");
     title.insertAdjacentElement("afterend", badge);
 
+    select.style.display = "none";
+
     if(stock === "soldout"){
       card.classList.add("soldout");
       select.disabled = true;
@@ -997,29 +999,10 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    for(let i = 1; i <= maxDevices; i++){
-      const option = document.createElement("option");
-      option.value = i;
-      option.textContent = i + " thiết bị";
-      select.appendChild(option);
-    }
-
-    function updatePrice(){
-      const devices = Number(select.value);
-      let total = basePrice;
-
-      if(devices > 1){
-        total += (devices - 1) * (basePrice * 0.5);
-      }
-
-      totalText.innerHTML =
-        "Tổng: " +
-        total.toLocaleString("vi-VN") +
-        "đ";
-    }
-
-    select.addEventListener("change", updatePrice);
-    updatePrice();
+    totalText.innerHTML =
+      "Tổng: " +
+      basePrice.toLocaleString("vi-VN") +
+      "đ";
   });
 });
 

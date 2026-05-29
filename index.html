@@ -526,6 +526,33 @@ video{
   box-shadow:none!important;
 }
 
+.maintenance-badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:7px 12px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:900;
+  margin-bottom:14px;
+  background:#f59e0b22;
+  color:#fde68a;
+  border:1px solid #f59e0b66;
+}
+
+.card.maintenance{
+  opacity:.72;
+  filter:grayscale(.2);
+}
+
+.card.maintenance .btn{
+  background:#475569!important;
+  color:#cbd5e1!important;
+  cursor:not-allowed;
+  pointer-events:none;
+  box-shadow:none!important;
+}
+
 .device-select:disabled{
   opacity:.55;
   cursor:not-allowed;
@@ -722,7 +749,7 @@ footer{
         <div class="feature-row">
           <div>
             <strong>Mobile</strong>
-            <span>Sẵn sàng</span>
+            <span>Đang bảo trì</span>
           </div>
 
           <div>
@@ -744,15 +771,16 @@ footer{
     </div>
 
     <div class="grid">
-      <div class="card">
+      <div class="card maintenance">
         <div class="icon">📱</div>
         <h3>Tool Mobile</h3>
-        <p>Phiên bản dành cho Android.</p>
+        <div class="maintenance-badge">🛠️ Đang bảo trì</div>
+        <p>Phiên bản Mobile hiện đang bảo trì, tạm thời chưa thể tải.</p>
 
-        <a href="https://www.mediafire.com/file/gkzu2bucri876d2/Multi+App_2.6.11.apk/file"
-           class="btn primary"
-           target="_blank">
-          Tải Mobile
+        <a href="#"
+           class="btn disabled"
+           onclick="return false;">
+          Đang bảo trì
         </a>
       </div>
 
@@ -768,15 +796,16 @@ footer{
         </a>
       </div>
 
-      <div class="card">
+      <div class="card maintenance">
         <div class="icon">🍎</div>
         <h3>Cài cho iOS</h3>
-        <p>Hỗ trợ cài đặt cho iPhone / iPad. Bấm vào nút bên dưới để cài </p>
+        <div class="maintenance-badge">🛠️ Đang bảo trì</div>
+        <p>Phiên bản iOS hiện đang bảo trì, tạm thời chưa thể cài.</p>
 
-        <a href="https://ipas.cc/tf0ke8"
-           class="btn primary"
-           target="_blank">
-          Cài iOS
+        <a href="#"
+           class="btn disabled"
+           onclick="return false;">
+          Đang bảo trì
         </a>
       </div>
     </div>
@@ -878,16 +907,17 @@ footer{
         <a href="https://t.me/sjxxtenn03" target="_blank" class="btn primary">Liên hệ admin</a>
       </div>
 
-      <div class="card" id="ios-free">
+      <div class="card maintenance" id="ios-free">
         <div class="icon">🆓</div>
         <h3>Key Free iOS</h3>
-        <div class="price">Miễn phí</div>
-        <p>Dành cho iPhone / iPad. Bấm vào nút bên dưới để lấy key free iOS.</p>
+        <div class="maintenance-badge">🛠️ Đang bảo trì</div>
+        <div class="price">Tạm khóa</div>
+        <p>Key Free iOS hiện đang bảo trì, vui lòng quay lại sau.</p>
 
-        <a href="https://authtool.app/get-key?code=f13e26e4-ed57-4564-a90a-cdc54f362183"
-           target="_blank"
-           class="btn secondary">
-          Lấy key free iOS
+        <a href="#"
+           class="btn disabled"
+           onclick="return false;">
+          Đang bảo trì
         </a>
       </div>
 
@@ -921,11 +951,12 @@ footer{
 /* SỬA NỘI DUNG THÔNG BÁO ADMIN Ở ĐÂY */
 const ADMIN_NOTICE_MESSAGE = `Chào mừng bạn đến với LAPBUFFXU.SITE!
 
-Hiện tại shop đang hỗ trợ:
-- Key VIP
-- Tool Mobile / PC / iOS
-- Dịch vụ cày thuê
+THÔNG BÁO BẢO TRÌ:
+- Tool Mobile hiện đang bảo trì
+- Cài iOS hiện đang bảo trì
+- Key Free iOS hiện đang bảo trì
 
+Hiện tại chỉ còn bản PC dùng được bình thường.
 
 Muốn mua key hoặc cần hỗ trợ thì bấm nút liên hệ admin nhé.`;
 

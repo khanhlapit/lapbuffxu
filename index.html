@@ -441,6 +441,18 @@ video{
   display:block;
 }
 
+.platform-title{
+  grid-column:1/-1;
+  font-size:24px;
+  font-weight:900;
+  margin-top:12px;
+  padding:14px 18px;
+  border-radius:18px;
+  background:#ffffff0d;
+  border:1px solid #ffffff18;
+  color:#dbeafe;
+}
+
 .price{
   font-size:28px;
   font-weight:900;
@@ -457,20 +469,6 @@ video{
 .note{
   color:#facc15!important;
   font-weight:700;
-}
-
-.device-select{
-  width:100%;
-  margin-top:12px;
-  margin-bottom:14px;
-  padding:12px;
-  border-radius:14px;
-  border:none;
-  outline:none;
-  background:#020617;
-  color:white;
-  border:1px solid #ffffff18;
-  font-size:15px;
 }
 
 .total-price{
@@ -551,11 +549,6 @@ video{
   cursor:not-allowed;
   pointer-events:none;
   box-shadow:none!important;
-}
-
-.device-select:disabled{
-  opacity:.55;
-  cursor:not-allowed;
 }
 
 .chat-wrapper{
@@ -748,17 +741,17 @@ footer{
 
         <div class="feature-row">
           <div>
-            <strong>Mobile</strong>
-            <span>Đang bảo trì</span>
+            <strong>ADR / iOS</strong>
+            <span>Key tuần và tháng</span>
           </div>
 
           <div>
             <strong>PC</strong>
-            <span>Sẵn sàng</span>
+            <span>Key ngày và tháng</span>
           </div>
         </div>
 
-        <a href="#download" class="showcase-btn">TẢI NGAY</a>
+        <a href="#vip" class="showcase-btn">XEM BẢNG GIÁ</a>
       </div>
     </div>
 
@@ -771,16 +764,15 @@ footer{
     </div>
 
     <div class="grid">
-      <div class="card maintenance">
-        <div class="icon">📱</div>
-        <h3>Tool Mobile</h3>
-        <div class="maintenance-badge">🛠️ Đang bảo trì</div>
-        <p>Phiên bản Mobile hiện đang bảo trì, tạm thời chưa thể tải.</p>
+      <div class="card">
+        <div class="icon">🤖</div>
+        <h3>Tool Android / ADR</h3>
+        <p>Phiên bản Android đã hoạt động lại. Bấm nút dưới để tải APK.</p>
 
-        <a href="#"
-           class="btn disabled"
-           onclick="return false;">
-          Đang bảo trì
+        <a href="https://www.mediafire.com/folder/zuzsysvc1veb2/ADR+MỚI+NHẤT"
+           class="btn primary"
+           target="_blank">
+          Tải Android / Máy Ảo
         </a>
       </div>
 
@@ -796,16 +788,15 @@ footer{
         </a>
       </div>
 
-      <div class="card maintenance">
+      <div class="card">
         <div class="icon">🍎</div>
         <h3>Cài cho iOS</h3>
-        <div class="maintenance-badge">🛠️ Đang bảo trì</div>
-        <p>Phiên bản iOS hiện đang bảo trì, tạm thời chưa thể cài.</p>
+        <p>Phiên bản iOS đã hoạt động lại. Bấm nút dưới để cài.</p>
 
-        <a href="#"
-           class="btn disabled"
-           onclick="return false;">
-          Đang bảo trì
+        <a href="https://zalo.me/0344792471"
+           class="btn primary"
+           target="_blank">
+          Cài iOS
         </a>
       </div>
     </div>
@@ -842,84 +833,75 @@ footer{
   <section id="vip">
     <div class="section-title">
       <h2>Bảng giá key VIP</h2>
-      <p class="note">Hiện tại chỉ bán key 1 thiết bị. Key nhiều thiết bị hiện không còn hàng. Muốn mua key vui lòng liên hệ admin.</p>
+      <p class="note">
+        Giá Android, PC, iOS khác nhau. Android và iOS chỉ bán key tuần/tháng. PC chỉ bán key ngày/tháng.
+        Hiện tại chỉ bán key 1 thiết bị. Muốn mua key vui lòng liên hệ admin.
+      </p>
     </div>
 
     <div class="grid">
 
-      <div class="card key-card" data-price="10000" data-max="1" data-stock="available">
+      <div class="platform-title">🤖 Android </div>
+
+      <div class="card key-card" data-price="50000" data-stock="available">
+        <div class="icon">📱</div>
+        <h3>ADR - Key 1 tuần</h3>
+        <div class="price">60.000đ</div>
+        <div class="key-info">Loại: Android / 1 thiết bị</div>
+        <div class="total-price"></div>
+        <a href="https://zalo.me/0344792471" target="_blank" class="btn primary">Liên hệ admin</a>
+      </div>
+
+      <div class="card key-card" data-price="150000" data-stock="available">
+        <div class="icon">📱</div>
+        <h3>ADR - Key 1 tháng</h3>
+        <div class="price">160.000đ</div>
+        <div class="key-info">Loại: Android / 1 thiết bị</div>
+        <div class="total-price"></div>
+        <a href="https://zalo.me/0344792471" target="_blank" class="btn primary">Liên hệ admin</a>
+      </div>
+
+      <div class="platform-title">🍎 iOS</div>
+
+      <div class="card key-card" data-price="70000" data-stock="available">
+        <div class="icon">🍎</div>
+        <h3>iOS - Key 1 tuần</h3>
+        <div class="price">100.000đ</div>
+        <div class="key-info">Loại: iOS / 1 thiết bị</div>
+        <div class="total-price"></div>
+        <a href="https://zalo.me/0344792471" target="_blank" class="btn primary">Liên hệ admin</a>
+      </div>
+
+      <div class="card key-card" data-price="180000" data-stock="available">
+        <div class="icon">🍎</div>
+        <h3>iOS - Key 1 tháng</h3>
+        <div class="price">260.000đ</div>
+        <div class="key-info">Loại: iOS / 1 thiết bị</div>
+        <div class="total-price"></div>
+        <a href="https://zalo.me/0344792471" target="_blank" class="btn primary">Liên hệ admin</a>
+      </div>
+
+      <div class="platform-title">💻 PC</div>
+
+      <div class="card key-card" data-price="10000" data-stock="available">
         <div class="icon">⚡</div>
-        <h3>Key 1 ngày</h3>
+        <h3>PC - Key 1 ngày</h3>
         <div class="price">10.000đ</div>
-        <div class="key-info">Loại: 1 thiết bị</div>
-        <select class="device-select"></select>
+        <div class="key-info">Loại: PC / 1 thiết bị</div>
         <div class="total-price"></div>
-        <a href="https://t.me/sjxxtenn03" target="_blank" class="btn primary">Liên hệ admin</a>
+        <a href="https://zalo.me/0344792471" target="_blank" class="btn primary">Liên hệ admin</a>
       </div>
 
-      <div class="card key-card" data-price="30000" data-max="1" data-stock="soldout">
-        <div class="icon">🔥</div>
-        <h3>Key 3 ngày</h3>
-        <div class="price">30.000đ</div>
-        <div class="key-info">Loại: 1 thiết bị</div>
-        <select class="device-select"></select>
-        <div class="total-price"></div>
-        <a href="https://t.me/sjxxtenn03" target="_blank" class="btn primary">Liên hệ admin</a>
-      </div>
-
-      <div class="card key-card" data-price="50000" data-max="1" data-stock="available">
-        <div class="icon">💎</div>
-        <h3>Key 1 tuần</h3>
-        <div class="price">50.000đ</div>
-        <div class="key-info">Loại: 1 thiết bị</div>
-        <select class="device-select"></select>
-        <div class="total-price"></div>
-        <a href="https://t.me/sjxxtenn03" target="_blank" class="btn primary">Liên hệ admin</a>
-      </div>
-
-      <div class="card key-card" data-price="80000" data-max="1" data-stock="soldout">
-        <div class="icon">🚀</div>
-        <h3>Key 2 tuần</h3>
-        <div class="price">80.000đ</div>
-        <div class="key-info">Loại: 1 thiết bị</div>
-        <select class="device-select"></select>
-        <div class="total-price"></div>
-        <a href="https://t.me/sjxxtenn03" target="_blank" class="btn primary">Liên hệ admin</a>
-      </div>
-
-      <div class="card key-card" data-price="120000" data-max="1" data-stock="soldout">
-        <div class="icon">👑</div>
-        <h3>Key 3 tuần</h3>
-        <div class="price">120.000đ</div>
-        <div class="key-info">Loại: 1 thiết bị</div>
-        <select class="device-select"></select>
-        <div class="total-price"></div>
-        <a href="https://t.me/sjxxtenn03" target="_blank" class="btn primary">Liên hệ admin</a>
-      </div>
-
-      <div class="card key-card" data-price="150000" data-max="1" data-stock="available">
+      <div class="card key-card" data-price="120000" data-stock="available">
         <div class="icon">🏆</div>
-        <h3>Key 1 tháng</h3>
+        <h3>PC - Key 1 tháng</h3>
         <div class="price">150.000đ</div>
-        <div class="key-info">Loại: 1 thiết bị</div>
-        <select class="device-select"></select>
+        <div class="key-info">Loại: PC / 1 thiết bị</div>
         <div class="total-price"></div>
-        <a href="https://t.me/sjxxtenn03" target="_blank" class="btn primary">Liên hệ admin</a>
+        <a href="https://zalo.me/0344792471" target="_blank" class="btn primary">Liên hệ admin</a>
       </div>
 
-      <div class="card maintenance" id="ios-free">
-        <div class="icon">🆓</div>
-        <h3>Key Free iOS</h3>
-        <div class="maintenance-badge">🛠️ Đang bảo trì</div>
-        <div class="price">Tạm khóa</div>
-        <p>Key Free iOS hiện đang bảo trì, vui lòng quay lại sau.</p>
-
-        <a href="#"
-           class="btn disabled"
-           onclick="return false;">
-          Đang bảo trì
-        </a>
-      </div>
+      
 
     </div>
   </section>
@@ -951,13 +933,18 @@ footer{
 /* SỬA NỘI DUNG THÔNG BÁO ADMIN Ở ĐÂY */
 const ADMIN_NOTICE_MESSAGE = `Chào mừng bạn đến với LAPBUFFXU.SITE!
 
-THÔNG BÁO BẢO TRÌ:
-- Tool Mobile hiện đang bảo trì
-- Cài iOS hiện đang bảo trì
-- Key Free iOS hiện đang bảo trì
+THÔNG BÁO MỚI:
+- Android đã hoạt động lại
+- iOS đã hoạt động lại
+- PC vẫn hoạt động bình thường
 
-Hiện tại chỉ còn bản PC dùng được bình thường.
-Bảng giá key VIP hiện chỉ bán key 1 thiết bị, không còn bán key nhiều thiết bị.
+
+BẢNG GIÁ KEY VIP:
+- Android  : chỉ bán key 1 tuần và 1 tháng
+- iOS: chỉ bán key 1 tuần và 1 tháng
+- PC: chỉ bán key 1 ngày và 1 tháng
+
+Hiện tại chỉ bán key 1 thiết bị, không bán key nhiều thiết bị.
 
 Muốn mua key hoặc cần hỗ trợ thì bấm nút liên hệ admin nhé.`;
 
@@ -974,7 +961,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const basePrice = Number(card.dataset.price);
     const stock = card.dataset.stock;
 
-    const select = card.querySelector(".device-select");
     const totalText = card.querySelector(".total-price");
     const contactBtn = card.querySelector("a.btn");
 
@@ -985,11 +971,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const title = card.querySelector("h3");
     title.insertAdjacentElement("afterend", badge);
 
-    select.style.display = "none";
-
     if(stock === "soldout"){
       card.classList.add("soldout");
-      select.disabled = true;
       contactBtn.classList.remove("primary");
       contactBtn.classList.add("disabled");
       contactBtn.removeAttribute("href");

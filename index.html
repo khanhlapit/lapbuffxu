@@ -1,1002 +1,1052 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LAPBUFFXU</title>
-
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Inter,Arial,sans-serif;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  background:
-    radial-gradient(circle at top left,#2563eb55,transparent 30%),
-    radial-gradient(circle at top right,#9333ea55,transparent 30%),
-    linear-gradient(180deg,#020617,#0f172a 45%,#020617);
-  color:white;
-  min-height:100vh;
-  overflow-x:hidden;
-}
-
-.bg-grid{
-  position:fixed;
-  inset:0;
-  background-image:
-    linear-gradient(#ffffff08 1px,transparent 1px),
-    linear-gradient(90deg,#ffffff08 1px,transparent 1px);
-  background-size:45px 45px;
-  z-index:0;
-  pointer-events:none;
-}
-
-/* POPUP THÔNG BÁO ADMIN */
-.notice-overlay{
-  position:fixed;
-  inset:0;
-  background:#000000aa;
-  backdrop-filter:blur(8px);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:99999;
-  padding:16px;
-}
-
-.notice-overlay.active{
-  display:flex;
-}
-
-.notice-box{
-  width:100%;
-  max-width:430px;
-  background:linear-gradient(180deg,#111827,#020617);
-  border:1px solid #ffffff22;
-  border-radius:28px;
-  padding:24px;
-  box-shadow:0 25px 80px #000;
-  animation:noticeZoom .25s ease;
-}
-
-@keyframes noticeZoom{
-  from{
-    opacity:0;
-    transform:scale(.9) translateY(20px);
-  }
-  to{
-    opacity:1;
-    transform:scale(1) translateY(0);
-  }
-}
-
-.notice-box h2{
-  font-size:26px;
-  margin-bottom:12px;
-  background:linear-gradient(90deg,#60a5fa,#c084fc,#22c55e);
-  -webkit-background-clip:text;
-  color:transparent;
-}
-
-.notice-box p{
-  color:#dbeafe;
-  line-height:1.7;
-  white-space:pre-line;
-  margin-bottom:20px;
-}
-
-.notice-close{
-  width:100%;
-  border:none;
-  padding:14px;
-  border-radius:16px;
-  color:white;
-  font-weight:900;
-  cursor:pointer;
-  background:linear-gradient(135deg,#2563eb,#9333ea);
-  box-shadow:0 12px 35px #2563eb55;
-}
-
-.notice-close:hover{
-  transform:translateY(-2px);
-}
-
-header{
-  position:sticky;
-  top:0;
-  z-index:999;
-  backdrop-filter:blur(16px);
-  background:#020617aa;
-  border-bottom:1px solid #ffffff14;
-}
-
-.nav{
-  max-width:1200px;
-  margin:auto;
-  padding:16px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-}
-
-.logo{
-  font-size:28px;
-  font-weight:900;
-  letter-spacing:1px;
-  background:linear-gradient(90deg,#60a5fa,#c084fc,#22c55e);
-  -webkit-background-clip:text;
-  color:transparent;
-}
-
-.links{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-}
-
-.links a{
-  color:#dbeafe;
-  text-decoration:none;
-  padding:10px 15px;
-  border-radius:999px;
-  background:#ffffff0b;
-  border:1px solid #ffffff14;
-  transition:.25s;
-}
-
-.links a:hover{
-  background:#2563eb;
-  transform:translateY(-2px);
-}
-
-.container{
-  max-width:1200px;
-  margin:auto;
-  padding:40px 16px;
-  position:relative;
-  z-index:1;
-}
-
-.hero{
-  min-height:650px;
-  display:grid;
-  grid-template-columns:1.1fr .9fr;
-  gap:35px;
-  align-items:center;
-}
-
-.badge{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  background:#22c55e1a;
-  color:#86efac;
-  border:1px solid #22c55e44;
-  padding:8px 14px;
-  border-radius:999px;
-  margin-bottom:22px;
-  font-size:14px;
-}
-
-.hero h1{
-  font-size:62px;
-  line-height:1;
-  margin-bottom:20px;
-  letter-spacing:-3px;
-}
-
-.hero h1 span{
-  background:linear-gradient(90deg,#60a5fa,#c084fc);
-  -webkit-background-clip:text;
-  color:transparent;
-}
-
-.hero p{
-  color:#cbd5e1;
-  line-height:1.7;
-  font-size:18px;
-  max-width:620px;
-  margin-bottom:25px;
-}
-
-.actions{
-  display:flex;
-  gap:14px;
-  flex-wrap:wrap;
-}
-
-.btn{
-  display:inline-flex;
-  justify-content:center;
-  align-items:center;
-  padding:14px 22px;
-  border-radius:18px;
-  text-decoration:none;
-  font-weight:800;
-  color:white;
-  transition:.25s;
-  border:1px solid #ffffff16;
-  cursor:pointer;
-}
-
-.btn.primary{
-  background:linear-gradient(135deg,#2563eb,#9333ea);
-  box-shadow:0 14px 40px #2563eb55;
-}
-
-.btn.secondary{
-  background:#ffffff0d;
-}
-
-.btn:hover{
-  transform:translateY(-4px);
-}
-
-.hero-showcase{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
-
-.glass-card{
-  width:100%;
-  min-height:430px;
-  position:relative;
-  overflow:hidden;
-  border-radius:34px;
-  padding:28px;
-  background:
-    linear-gradient(145deg,#ffffff16,#ffffff08),
-    radial-gradient(circle at top right,#9333ea66,transparent 35%),
-    radial-gradient(circle at bottom left,#2563eb66,transparent 35%);
-  border:1px solid #ffffff18;
-  box-shadow:0 25px 70px #0008;
-  backdrop-filter:blur(18px);
-}
-
-.circle{
-  position:absolute;
-  border-radius:50%;
-  filter:blur(5px);
-}
-
-.circle.one{
-  width:180px;
-  height:180px;
-  background:#2563eb;
-  right:-50px;
-  top:-50px;
-}
-
-.circle.two{
-  width:130px;
-  height:130px;
-  background:#22c55e;
-  left:-40px;
-  bottom:-40px;
-}
-
-.showcase-top{
-  position:relative;
-  z-index:2;
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:65px;
-  color:#dbeafe;
-}
-
-.showcase-top b{
-  background:#22c55e22;
-  border:1px solid #22c55e55;
-  color:#86efac;
-  padding:8px 14px;
-  border-radius:999px;
-  font-size:13px;
-}
-
-.main-title{
-  position:relative;
-  z-index:2;
-  text-align:center;
-  margin-bottom:45px;
-}
-
-.main-title h3{
-  font-size:54px;
-  letter-spacing:2px;
-  margin-bottom:10px;
-  background:linear-gradient(90deg,#60a5fa,#c084fc,#22c55e);
-  -webkit-background-clip:text;
-  color:transparent;
-}
-
-.main-title p{
-  color:#cbd5e1;
-  font-size:18px;
-}
-
-.feature-row{
-  position:relative;
-  z-index:2;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
-  margin-bottom:22px;
-}
-
-.feature-row div{
-  background:#02061799;
-  border:1px solid #ffffff18;
-  border-radius:18px;
-  padding:18px;
-}
-
-.feature-row strong{
-  display:block;
-  margin-bottom:6px;
-  font-size:19px;
-}
-
-.feature-row span{
-  color:#94a3b8;
-}
-
-.showcase-btn{
-  position:relative;
-  z-index:2;
-  display:block;
-  text-align:center;
-  padding:15px;
-  border-radius:18px;
-  text-decoration:none;
-  color:white;
-  font-weight:900;
-  background:linear-gradient(135deg,#2563eb,#9333ea);
-  box-shadow:0 14px 35px #2563eb55;
-}
-
-section{
-  margin:65px 0;
-}
-
-.section-title{
-  margin-bottom:22px;
-}
-
-.section-title h2{
-  font-size:38px;
-  margin-bottom:10px;
-}
-
-.section-title p{
-  color:#94a3b8;
-  max-width:650px;
-  line-height:1.7;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:20px;
-}
-
-.card{
-  background:linear-gradient(180deg,#ffffff12,#ffffff08);
-  border:1px solid #ffffff16;
-  border-radius:28px;
-  padding:24px;
-  transition:.25s;
-  backdrop-filter:blur(12px);
-  box-shadow:0 18px 45px #0006;
-}
-
-.card:hover{
-  transform:translateY(-8px);
-  border-color:#60a5fa88;
-}
-
-.icon{
-  width:58px;
-  height:58px;
-  border-radius:18px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:28px;
-  background:linear-gradient(135deg,#2563eb,#9333ea);
-  margin-bottom:18px;
-}
-
-.card h3{
-  font-size:24px;
-  margin-bottom:12px;
-}
-
-.card p{
-  color:#cbd5e1;
-  line-height:1.7;
-  margin-bottom:18px;
-}
-
-.video-box{
-  background:linear-gradient(180deg,#ffffff12,#ffffff08);
-  border:1px solid #ffffff16;
-  border-radius:30px;
-  padding:18px;
-  box-shadow:0 18px 55px #0008;
-}
-
-video{
-  width:100%;
-  border-radius:22px;
-  background:black;
-  display:block;
-}
-
-.platform-title{
-  grid-column:1/-1;
-  font-size:24px;
-  font-weight:900;
-  margin-top:12px;
-  padding:14px 18px;
-  border-radius:18px;
-  background:#ffffff0d;
-  border:1px solid #ffffff18;
-  color:#dbeafe;
-}
-
-.price{
-  font-size:28px;
-  font-weight:900;
-  color:#86efac;
-  margin-bottom:12px;
-}
-
-.key-info{
-  font-size:14px;
-  color:#cbd5e1;
-  margin-bottom:8px;
-}
-
-.note{
-  color:#facc15!important;
-  font-weight:700;
-}
-
-.total-price{
-  font-size:22px;
-  font-weight:900;
-  color:#facc15;
-  margin-bottom:16px;
-}
-
-.stock-badge{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:7px 12px;
-  border-radius:999px;
-  font-size:13px;
-  font-weight:900;
-  margin-bottom:14px;
-}
-
-.stock-badge.available{
-  background:#22c55e22;
-  color:#86efac;
-  border:1px solid #22c55e66;
-}
-
-.stock-badge.soldout{
-  background:#ef444422;
-  color:#fca5a5;
-  border:1px solid #ef444466;
-}
-
-.key-card.soldout{
-  opacity:.62;
-  filter:grayscale(.25);
-  position:relative;
-}
-
-.key-card.soldout:hover{
-  transform:none;
-  border-color:#ef444455;
-}
-
-.key-card.soldout .price{
-  color:#fca5a5;
-}
-
-.btn.disabled{
-  background:#475569!important;
-  color:#cbd5e1!important;
-  cursor:not-allowed;
-  pointer-events:none;
-  box-shadow:none!important;
-}
-
-.maintenance-badge{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:7px 12px;
-  border-radius:999px;
-  font-size:13px;
-  font-weight:900;
-  margin-bottom:14px;
-  background:#f59e0b22;
-  color:#fde68a;
-  border:1px solid #f59e0b66;
-}
-
-.card.maintenance{
-  opacity:.72;
-  filter:grayscale(.2);
-}
-
-.card.maintenance .btn{
-  background:#475569!important;
-  color:#cbd5e1!important;
-  cursor:not-allowed;
-  pointer-events:none;
-  box-shadow:none!important;
-}
-
-.chat-wrapper{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  z-index:9999;
-}
-
-.chat-toggle{
-  width:64px;
-  height:64px;
-  border-radius:50%;
-  border:none;
-  cursor:pointer;
-  color:white;
-  font-size:28px;
-  background:linear-gradient(135deg,#2563eb,#9333ea);
-  box-shadow:0 12px 35px #2563eb88;
-  animation:chatFloat 2s infinite;
-}
-
-@keyframes chatFloat{
-  0%{transform:translateY(0)}
-  50%{transform:translateY(-8px)}
-  100%{transform:translateY(0)}
-}
-
-.chat-box{
-  position:absolute;
-  right:0;
-  bottom:78px;
-  width:280px;
-  background:linear-gradient(180deg,#111827,#020617);
-  border:1px solid #ffffff18;
-  border-radius:24px;
-  padding:18px;
-  box-shadow:0 20px 60px #0009;
-  display:none;
-}
-
-.chat-box.active{
-  display:block;
-}
-
-.chat-box h3{
-  font-size:20px;
-  margin-bottom:8px;
-}
-
-.chat-box p{
-  color:#cbd5e1;
-  font-size:14px;
-  line-height:1.5;
-  margin-bottom:14px;
-}
-
-.chat-link{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  width:100%;
-  padding:12px;
-  margin-top:10px;
-  border-radius:14px;
-  text-decoration:none;
-  color:white;
-  font-weight:800;
-  transition:.25s;
-}
-
-.chat-link.telegram{
-  background:linear-gradient(135deg,#229ED9,#2563eb);
-}
-
-.chat-link.zalo{
-  background:linear-gradient(135deg,#0068ff,#00b4ff);
-}
-
-.chat-link:hover{
-  transform:translateY(-3px);
-}
-
-footer{
-  margin-top:80px;
-  padding:30px;
-  text-align:center;
-  color:#94a3b8;
-  border-top:1px solid #ffffff14;
-}
-
-@media(max-width:900px){
-  .hero{
-    grid-template-columns:1fr;
-    min-height:auto;
-  }
-
-  .hero h1{
-    font-size:46px;
-  }
-}
-
-@media(max-width:600px){
-  .nav{
-    flex-direction:column;
-  }
-
-  .hero h1{
-    font-size:38px;
-  }
-
-  .main-title h3{
-    font-size:42px;
-  }
-
-  .feature-row{
-    grid-template-columns:1fr;
-  }
-
-  .chat-box{
-    width:260px;
-  }
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LAPBUFFXU</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Inter,Arial,sans-serif;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      min-height:100vh;
+      color:white;
+      overflow-x:hidden;
+      background:
+        radial-gradient(circle at top left,#2563eb55,transparent 32%),
+        radial-gradient(circle at top right,#9333ea55,transparent 32%),
+        linear-gradient(180deg,#020617,#0f172a 45%,#020617);
+    }
+
+    .bg-grid{
+      position:fixed;
+      inset:0;
+      background-image:
+        linear-gradient(#ffffff08 1px,transparent 1px),
+        linear-gradient(90deg,#ffffff08 1px,transparent 1px);
+      background-size:45px 45px;
+      pointer-events:none;
+      z-index:0;
+    }
+
+    .container{
+      width:100%;
+      max-width:1200px;
+      margin:auto;
+      padding:38px 16px;
+      position:relative;
+      z-index:1;
+    }
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:999;
+      background:#020617cc;
+      backdrop-filter:blur(16px);
+      border-bottom:1px solid #ffffff14;
+    }
+
+    .nav{
+      max-width:1200px;
+      margin:auto;
+      padding:15px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+
+    .logo{
+      font-size:28px;
+      font-weight:950;
+      letter-spacing:1px;
+      background:linear-gradient(90deg,#60a5fa,#c084fc,#22c55e);
+      -webkit-background-clip:text;
+      color:transparent;
+      white-space:nowrap;
+    }
+
+    .links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:center;
+    }
+
+    .links a{
+      color:#dbeafe;
+      text-decoration:none;
+      padding:9px 14px;
+      border-radius:999px;
+      background:#ffffff0b;
+      border:1px solid #ffffff14;
+      transition:.25s;
+      font-weight:700;
+      font-size:14px;
+    }
+
+    .links a:hover{
+      background:#2563eb;
+      transform:translateY(-2px);
+    }
+
+    .hero{
+      min-height:650px;
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      align-items:center;
+      gap:36px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 14px;
+      border-radius:999px;
+      background:#22c55e1a;
+      color:#86efac;
+      border:1px solid #22c55e44;
+      margin-bottom:22px;
+      font-weight:800;
+      font-size:14px;
+    }
+
+    .hero h1{
+      font-size:64px;
+      line-height:1;
+      letter-spacing:-3px;
+      margin-bottom:20px;
+    }
+
+    .hero h1 span{
+      background:linear-gradient(90deg,#60a5fa,#c084fc,#22c55e);
+      -webkit-background-clip:text;
+      color:transparent;
+    }
+
+    .hero p{
+      color:#cbd5e1;
+      font-size:18px;
+      line-height:1.75;
+      max-width:640px;
+      margin-bottom:26px;
+    }
+
+    .actions{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      display:inline-flex;
+      justify-content:center;
+      align-items:center;
+      gap:8px;
+      padding:14px 22px;
+      border-radius:18px;
+      text-decoration:none;
+      color:white;
+      font-weight:900;
+      transition:.25s;
+      border:1px solid #ffffff16;
+      cursor:pointer;
+      outline:none;
+    }
+
+    .btn.primary{
+      background:linear-gradient(135deg,#2563eb,#9333ea);
+      box-shadow:0 14px 40px #2563eb55;
+    }
+
+    .btn.secondary{
+      background:#ffffff0d;
+    }
+
+    .btn:hover{
+      transform:translateY(-4px);
+    }
+
+    .hero-card{
+      position:relative;
+      overflow:hidden;
+      min-height:435px;
+      border-radius:36px;
+      padding:28px;
+      background:
+        linear-gradient(145deg,#ffffff18,#ffffff08),
+        radial-gradient(circle at top right,#9333ea66,transparent 35%),
+        radial-gradient(circle at bottom left,#2563eb66,transparent 35%);
+      border:1px solid #ffffff18;
+      box-shadow:0 25px 70px #0008;
+      backdrop-filter:blur(18px);
+    }
+
+    .circle{
+      position:absolute;
+      border-radius:50%;
+      filter:blur(6px);
+    }
+
+    .circle.one{
+      width:190px;
+      height:190px;
+      background:#2563eb;
+      right:-60px;
+      top:-60px;
+    }
+
+    .circle.two{
+      width:150px;
+      height:150px;
+      background:#22c55e;
+      left:-50px;
+      bottom:-50px;
+    }
+
+    .showcase-top{
+      position:relative;
+      z-index:2;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:70px;
+      color:#dbeafe;
+      font-weight:800;
+    }
+
+    .showcase-top b{
+      background:#22c55e22;
+      border:1px solid #22c55e55;
+      color:#86efac;
+      padding:8px 14px;
+      border-radius:999px;
+      font-size:13px;
+    }
+
+    .showcase-title{
+      position:relative;
+      z-index:2;
+      text-align:center;
+      margin-bottom:42px;
+    }
+
+    .showcase-title h2{
+      font-size:52px;
+      letter-spacing:1px;
+      margin-bottom:10px;
+      background:linear-gradient(90deg,#60a5fa,#c084fc,#22c55e);
+      -webkit-background-clip:text;
+      color:transparent;
+    }
+
+    .showcase-title p{
+      color:#cbd5e1;
+      margin:0;
+    }
+
+    .mini-grid{
+      position:relative;
+      z-index:2;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    .mini-card{
+      padding:18px;
+      border-radius:20px;
+      background:#02061799;
+      border:1px solid #ffffff18;
+    }
+
+    .mini-card strong{
+      display:block;
+      font-size:18px;
+      margin-bottom:7px;
+    }
+
+    .mini-card span{
+      color:#94a3b8;
+      font-size:14px;
+    }
+
+    section{
+      margin:70px 0;
+    }
+
+    .section-title{
+      margin-bottom:24px;
+    }
+
+    .section-title h2{
+      font-size:38px;
+      margin-bottom:10px;
+    }
+
+    .section-title p{
+      color:#94a3b8;
+      line-height:1.7;
+      max-width:720px;
+    }
+
+    .note{
+      color:#facc15!important;
+      font-weight:800;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:20px;
+    }
+
+    .card{
+      background:linear-gradient(180deg,#ffffff12,#ffffff08);
+      border:1px solid #ffffff16;
+      border-radius:28px;
+      padding:24px;
+      transition:.25s;
+      backdrop-filter:blur(12px);
+      box-shadow:0 18px 45px #0006;
+    }
+
+    .card:hover{
+      transform:translateY(-8px);
+      border-color:#60a5fa88;
+    }
+
+    .icon{
+      width:60px;
+      height:60px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      font-size:28px;
+      border-radius:20px;
+      margin-bottom:18px;
+      background:linear-gradient(135deg,#2563eb,#9333ea);
+      box-shadow:0 12px 30px #2563eb44;
+    }
+
+    .card h3{
+      font-size:24px;
+      margin-bottom:12px;
+    }
+
+    .card p{
+      color:#cbd5e1;
+      line-height:1.7;
+      margin-bottom:18px;
+    }
+
+    .version-card{
+      cursor:pointer;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .version-card::after{
+      content:"";
+      position:absolute;
+      width:160px;
+      height:160px;
+      right:-70px;
+      top:-70px;
+      border-radius:50%;
+      background:#60a5fa33;
+      transition:.25s;
+    }
+
+    .version-card:hover::after{
+      transform:scale(1.35);
+    }
+
+    .tag-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-bottom:18px;
+    }
+
+    .tag{
+      padding:7px 11px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:900;
+      background:#ffffff0d;
+      border:1px solid #ffffff18;
+      color:#dbeafe;
+    }
+
+    .panel{
+      display:none;
+      margin-top:28px;
+      padding:24px;
+      border-radius:30px;
+      background:#020617a6;
+      border:1px solid #ffffff18;
+      box-shadow:0 18px 55px #0008;
+      animation:panelShow .25s ease;
+    }
+
+    .panel.active{
+      display:block;
+    }
+
+    @keyframes panelShow{
+      from{
+        opacity:0;
+        transform:translateY(18px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    .panel-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:22px;
+      flex-wrap:wrap;
+    }
+
+    .panel-head h2{
+      font-size:32px;
+      margin-bottom:8px;
+    }
+
+    .panel-head p{
+      color:#94a3b8;
+      line-height:1.6;
+    }
+
+    .price{
+      font-size:30px;
+      font-weight:950;
+      color:#86efac;
+      margin-bottom:10px;
+    }
+
+    .stock{
+      display:inline-flex;
+      padding:7px 12px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:950;
+      margin-bottom:12px;
+      background:#22c55e22;
+      color:#86efac;
+      border:1px solid #22c55e66;
+    }
+
+    .video-box{
+      background:linear-gradient(180deg,#ffffff12,#ffffff08);
+      border:1px solid #ffffff16;
+      border-radius:30px;
+      padding:18px;
+      box-shadow:0 18px 55px #0008;
+    }
+
+    video{
+      width:100%;
+      border-radius:22px;
+      background:black;
+      display:block;
+    }
+
+    .notice-overlay{
+      position:fixed;
+      inset:0;
+      background:#000000aa;
+      backdrop-filter:blur(8px);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:99999;
+      padding:16px;
+    }
+
+    .notice-overlay.active{
+      display:flex;
+    }
+
+    .notice-box{
+      width:100%;
+      max-width:430px;
+      background:linear-gradient(180deg,#111827,#020617);
+      border:1px solid #ffffff22;
+      border-radius:28px;
+      padding:24px;
+      box-shadow:0 25px 80px #000;
+      animation:noticeZoom .25s ease;
+    }
+
+    @keyframes noticeZoom{
+      from{
+        opacity:0;
+        transform:scale(.92) translateY(20px);
+      }
+      to{
+        opacity:1;
+        transform:scale(1) translateY(0);
+      }
+    }
+
+    .notice-box h2{
+      font-size:26px;
+      margin-bottom:12px;
+      background:linear-gradient(90deg,#60a5fa,#c084fc,#22c55e);
+      -webkit-background-clip:text;
+      color:transparent;
+    }
+
+    .notice-box p{
+      color:#dbeafe;
+      line-height:1.7;
+      white-space:pre-line;
+      margin-bottom:20px;
+    }
+
+    .notice-close{
+      width:100%;
+      border:none;
+      padding:14px;
+      border-radius:16px;
+      color:white;
+      font-weight:950;
+      cursor:pointer;
+      background:linear-gradient(135deg,#2563eb,#9333ea);
+      box-shadow:0 12px 35px #2563eb55;
+    }
+
+    .chat-wrapper{
+      position:fixed;
+      right:20px;
+      bottom:20px;
+      z-index:9999;
+    }
+
+    .chat-toggle{
+      width:64px;
+      height:64px;
+      border-radius:50%;
+      border:none;
+      cursor:pointer;
+      color:white;
+      font-size:28px;
+      background:linear-gradient(135deg,#2563eb,#9333ea);
+      box-shadow:0 12px 35px #2563eb88;
+      animation:chatFloat 2s infinite;
+    }
+
+    @keyframes chatFloat{
+      0%{transform:translateY(0)}
+      50%{transform:translateY(-8px)}
+      100%{transform:translateY(0)}
+    }
+
+    .chat-box{
+      position:absolute;
+      right:0;
+      bottom:78px;
+      width:280px;
+      background:linear-gradient(180deg,#111827,#020617);
+      border:1px solid #ffffff18;
+      border-radius:24px;
+      padding:18px;
+      box-shadow:0 20px 60px #0009;
+      display:none;
+    }
+
+    .chat-box.active{
+      display:block;
+    }
+
+    .chat-box h3{
+      font-size:20px;
+      margin-bottom:8px;
+    }
+
+    .chat-box p{
+      color:#cbd5e1;
+      font-size:14px;
+      line-height:1.5;
+      margin-bottom:14px;
+    }
+
+    .chat-link{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      width:100%;
+      padding:12px;
+      margin-top:10px;
+      border-radius:14px;
+      text-decoration:none;
+      color:white;
+      font-weight:900;
+      transition:.25s;
+    }
+
+    .chat-link.telegram{
+      background:linear-gradient(135deg,#229ED9,#2563eb);
+    }
+
+    .chat-link.zalo{
+      background:linear-gradient(135deg,#0068ff,#00b4ff);
+    }
+
+    footer{
+      margin-top:80px;
+      padding:30px 16px;
+      text-align:center;
+      color:#94a3b8;
+      border-top:1px solid #ffffff14;
+      position:relative;
+      z-index:1;
+    }
+
+    @media(max-width:900px){
+      .hero{
+        grid-template-columns:1fr;
+        min-height:auto;
+        padding-top:20px;
+      }
+
+      .hero h1{
+        font-size:46px;
+      }
+    }
+
+    @media(max-width:600px){
+      .nav{
+        flex-direction:column;
+      }
+
+      .hero h1{
+        font-size:38px;
+        letter-spacing:-2px;
+      }
+
+      .section-title h2{
+        font-size:31px;
+      }
+
+      .showcase-title h2{
+        font-size:40px;
+      }
+
+      .mini-grid{
+        grid-template-columns:1fr;
+      }
+
+      .chat-box{
+        width:260px;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <div class="bg-grid"></div>
 
-<div class="bg-grid"></div>
-
-<div class="notice-overlay" id="adminNotice">
-  <div class="notice-box">
-    <h2>📢 Thông báo</h2>
-    <p id="noticeText"></p>
-    <button class="notice-close" onclick="closeNotice()">Đóng</button>
-  </div>
-</div>
-
-<header>
-  <div class="nav">
-    <div class="logo">LAPBUFFXU</div>
-
-    <div class="links">
-      <a href="#download">Link tải</a>
-      <a href="#video">Video</a>
-      <a href="#service">Dịch vụ</a>
-      <a href="#vip">Key VIP</a>
-
+  <div class="notice-overlay" id="adminNotice">
+    <div class="notice-box">
+      <h2>📢 Thông báo</h2>
+      <p id="noticeText"></p>
+      <button class="notice-close" onclick="closeNotice()">Đóng</button>
     </div>
   </div>
-</header>
 
-<div class="container">
-
-  <div class="hero">
-
-    <div>
-      <div class="badge">● WEBSITE CHÍNH THỨC</div>
-
-      <h1>
-        LAPBUFFXU.SITE<br>
-        <span>Uy Tín - Chất Lượng</span>
-      </h1>
-
-      <p>
-        Trang tải tool, video hướng dẫn cài đặt và các dịch vụ khác.
-        Tối ưu cho điện thoại và máy tính.
-      </p>
-
-      <div class="actions">
-        <a href="#download" class="btn primary">Tải ngay</a>
-        <a href="#video" class="btn secondary">Xem video</a>
+  <header>
+    <div class="nav">
+      <div class="logo">LAPBUFFXU</div>
+      <div class="links">
+        <a href="#download">Link tải</a>
+        <a href="#vip">Bảng giá</a>
+        <a href="#video">Video</a>
+        <a href="#service">Dịch vụ</a>
       </div>
     </div>
+  </header>
 
-    <div class="hero-showcase">
-      <div class="glass-card">
+  <main class="container">
+    <section class="hero">
+      <div>
+        <div class="badge">● WEBSITE CHÍNH THỨC</div>
+        <h1>LAPBUFFXU.SITE<br><span>Uy Tín - Chất Lượng - An Toàn - Bảo Mật</span></h1>
+        <p>
+          Chọn đúng phiên bản thiết bị xem bảng giá riêng bên trong.
+        
+        </p>
+        <div class="actions">
+          <a href="#vip" class="btn primary">Xem phiên bản</a>
+          <a href="#download" class="btn secondary">Link tải</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
         <div class="circle one"></div>
         <div class="circle two"></div>
 
         <div class="showcase-top">
-          <span>LAPBUFFXU</span>
-          <b>NEW VERSION</b>
+          <span>LAPBUFFXU.SITE</span>
+          <b>VIP</b>
         </div>
 
-        <div class="main-title">
-          <h3>GAME BOOST</h3>
-          <p>Tool • Key VIP • Dịch vụ</p>
+        <div class="showcase-title">
+          <h2>VIP KEY</h2>
+          <p>Android • iOS • PC</p>
         </div>
 
-        <div class="feature-row">
+        <div class="mini-grid">
+          <div class="mini-card">
+            <strong>Giao diện sạch</strong>
+            <span>Ẩn giá bên ngoài, bấm mới hiện.</span>
+          </div>
+          <div class="mini-card">
+            <strong>Dễ mua key</strong>
+            <span>Mỗi phiên bản có bảng riêng.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="download">
+      <div class="section-title">
+        <h2>Link tải</h2>
+        <p>Chọn đúng thiết bị để tải hoặc liên hệ admin cài đặt.</p>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <div class="icon">🤖</div>
+          <h3>Android / ADR</h3>
+          <p>Phiên bản dành cho Android hoặc máy ảo Android.</p>
+          <a href="https://www.mediafire.com/folder/zuzsysvc1veb2/ADR+MỚI+NHẤT" target="_blank" class="btn primary">Tải Android</a>
+        </div>
+
+        <div class="card">
+          <div class="icon">🍎</div>
+          <h3>iOS</h3>
+          <p>Phiên bản iOS cần liên hệ admin để được hướng dẫn cài.</p>
+          <a href="https://zalo.me/0344792471" target="_blank" class="btn primary">Liên hệ iOS</a>
+        </div>
+
+        <div class="card">
+          <div class="icon">💻</div>
+          <h3>PC</h3>
+          <p>Phiên bản dành cho PC / giả lập.</p>
+          <a href="https://www.mediafire.com/folder/400s18qtwsp0y/module" target="_blank" class="btn primary">Tải PC</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="vip">
+      <div class="section-title">
+        <h2>Chọn phiên bản VIP</h2>
+        <p class="note">Bên ngoài chỉ hiện phiên bản. Bấm vào Android, iOS hoặc PC để xem bảng giá riêng.</p>
+      </div>
+
+      <div class="grid">
+        <div class="card version-card" onclick="openPanel('androidPanel')">
+          <div class="icon">🤖</div>
+          <h3>Android </h3>
+          <div class="tag-row">
+            <span class="tag">1 thiết bị</span>
+            <span class="tag">Tuần / Tháng</span>
+          </div>
+          <p>Dành cho khách dùng Android hoặc máy ảo Android.</p>
+          <button class="btn primary">Xem gói Android</button>
+        </div>
+
+        <div class="card version-card" onclick="openPanel('iosPanel')">
+          <div class="icon">🍎</div>
+          <h3>iOS</h3>
+          <div class="tag-row">
+            <span class="tag">1 thiết bị</span>
+            <span class="tag">Tuần / Tháng</span>
+          </div>
+          <p>Dành cho khách dùng iPhone hoặc iPad.</p>
+          <button class="btn primary">Xem gói iOS</button>
+        </div>
+
+        <div class="card version-card" onclick="openPanel('pcPanel')">
+          <div class="icon">💻</div>
+          <h3>PC</h3>
+          <div class="tag-row">
+            <span class="tag">1 thiết bị</span>
+            <span class="tag">Ngày / Tháng</span>
+          </div>
+          <p>Dành cho khách dùng PC hoặc giả lập.</p>
+          <button class="btn primary">Xem gói PC</button>
+        </div>
+      </div>
+
+      <div class="panel" id="androidPanel">
+        <div class="panel-head">
           <div>
-            <strong>ADR / iOS</strong>
-            <span>Key tuần và tháng</span>
+            <h2>🤖 Android </h2>
+            <p>ADR có 2 phiên bản riêng. Chọn đúng bản cần mua rồi liên hệ admin để lấy key.</p>
+          </div>
+          <button class="btn secondary" onclick="closePanels()">Đóng bảng</button>
+        </div>
+
+        <div class="card" style="margin-bottom:22px;">
+          <div class="icon">🎣</div>
+          <h3>Phiên Bản ADR Câu Cá - Đập Đá - Bắt Bọ</h3>
+          <p>Bản ADR cơ bản dành cho câu cá, đập đá và bắt bọ.</p>
+
+          <div class="grid">
+            <div class="card">
+              <h3>Key 1 ngày</h3>
+              <div class="stock">✅ Còn hàng</div>
+              <div class="price">10.000</div>
+              <p>Loại: Android / 1 thiết bị</p>
+              <a href="https://zalo.me/0344792471" target="_blank" class="btn primary">Liên hệ admin</a>
+            </div>
+
+            <div class="card">
+              <h3>Key 7 ngày</h3>
+              <div class="stock">✅ Còn hàng</div>
+              <div class="price">45.000</div>
+              <p>Loại: Android / 1 thiết bị</p>
+              <a href="https://zalo.me/0344792471" target="_blank" class="btn primary">Liên hệ admin</a>
+            </div>
+
+            <div class="card">
+              <h3>Key 14 ngày</h3>
+              <div class="stock">✅80.000</div>
+              <div class="price">Liên hệ</div>
+              <p>Loại: Android / 1 thiết bị</p>
+              <a href="https://zalo.me/0344792471" target="_blank" class="btn primary">Liên hệ admin</a>
+            </div>
+
+            <div class="card">
+              <h3>Key 30 ngày</h3>
+              <div class="stock">✅ 140.000</div>
+              <div class="price">Liên hệ</div>
+              <p>Loại: Android / 1 thiết bị</p>
+              <a href="https://zalo.me/0344792471" target="_blank" class="btn primary">Liên hệ admin</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="icon">🚀</div>
+          <h3>Phiên Bản ADR Câu Cá - Đập Đá - Bắt Bọ - Mini Game - Dò Map Trống .... Nhiều Chức Năng Khác</h3>
+          <p>Bản ADR nhiều chức năng hơn, phù hợp khách cần full tính năng.</p>
+
+          <div class="grid">
+            <div class="card">
+              <h3>Key 7 ngày</h3>
+              <div class="stock">✅ Còn hàng</div>
+              <div class="price">60.000</div>
+              <p>Loại: Android / 1 thiết bị</p>
+              <a href="https://zalo.me/0344792471" target="_blank" class="btn primary">Liên hệ admin</a>
+            </div>
+
+            <div class="card">
+              <h3>Key 30 ngày</h3>
+              <div class="stock">✅ Còn hàng</div>
+              <div class="price">160.000</div>
+              <p>Loại: Android / 1 thiết bị</p>
+              <a href="https://zalo.me/0344792471" target="_blank" class="btn primary">Liên hệ admin</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" id="iosPanel">
+        <div class="panel-head">
+          <div>
+            <h2>🍎 iOS</h2>
+            <p>Bảng giá dành cho iOS. Khách cần liên hệ admin để được hỗ trợ cài đặt.</p>
+          </div>
+          <button class="btn secondary" onclick="closePanels()">Đóng bảng</button>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <div class="icon">🍎</div>
+            <h3>iOS - Key 1 tuần</h3>
+            <div class="stock">✅ Còn hàng</div>
+            <div class="price">100.000đ</div>
+            <p>Loại: iOS / 1 thiết bị</p>
+            <a href="https://zalo.me/0344792471" target="_blank" class="btn primary">Liên hệ admin</a>
           </div>
 
-          <div>
-            <strong>PC</strong>
-            <span>Key ngày và tháng</span>
+          <div class="card">
+            <div class="icon">🍎</div>
+            <h3>iOS - Key 1 tháng</h3>
+            <div class="stock">✅ Còn hàng</div>
+            <div class="price">260.000đ</div>
+            <p>Loại: iOS / 1 thiết bị</p>
+            <a href="https://zalo.me/0344792471" target="_blank" class="btn primary">Liên hệ admin</a>
           </div>
         </div>
-
-        <a href="#vip" class="showcase-btn">XEM BẢNG GIÁ</a>
       </div>
+
+      <div class="panel" id="pcPanel">
+        <div class="panel-head">
+          <div>
+            <h2>💻 PC</h2>
+            <p>Bảng giá dành cho PC hoặc giả lập. Hiện tại chỉ bán key 1 thiết bị.</p>
+          </div>
+          <button class="btn secondary" onclick="closePanels()">Đóng bảng</button>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <div class="icon">⚡</div>
+            <h3>PC - Key 1 ngày</h3>
+            <div class="stock">✅ Còn hàng</div>
+            <div class="price">10.000đ</div>
+            <p>Loại: PC / 1 thiết bị</p>
+            <a href="https://zalo.me/0344792471" target="_blank" class="btn primary">Liên hệ admin</a>
+          </div>
+
+          <div class="card">
+            <div class="icon">🏆</div>
+            <h3>PC - Key 1 tháng</h3>
+            <div class="stock">✅ Còn hàng</div>
+            <div class="price">150.000đ</div>
+            <p>Loại: PC / 1 thiết bị</p>
+            <a href="https://zalo.me/0344792471" target="_blank" class="btn primary">Liên hệ admin</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="video">
+      <div class="section-title">
+        <h2>Video hướng dẫn</h2>
+        <p>Web có 2 video hướng dẫn riêng cho 2 phiên bản ADR. Đổi đúng tên file video rồi bỏ chung thư mục với file HTML này.</p>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <div class="icon">🎣</div>
+          <h3>Video hướng dẫn</h3>
+          <p><b>Phiên Bản ADR Câu Cá - Đập Đá - Bắt Bọ</b></p>
+
+          <div class="video-box">
+            <video controls>
+              <source src="adr-cau-ca-dap-da-bat-bo.mp4" type="video/mp4" />
+            </video>
+          </div>
+
+          <p style="margin-top:14px;color:#94a3b8;">
+            Tên file video: <b>adr-cau-ca-dap-da-bat-bo.mp4</b>
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🚀</div>
+          <h3>Video hướng dẫn</h3>
+          <p><b>Phiên Bản ADR Câu Cá - Đập Đá - Bắt Bọ - Mini Game - Dò Map Trống .... Nhiều Chức Năng Khác</b></p>
+
+          <div class="video-box">
+            <video controls>
+              <source src="adr-full-chuc-nang.mp4" type="video/mp4" />
+            </video>
+          </div>
+
+          <p style="margin-top:14px;color:#94a3b8;">
+            Tên file video: <b>adr-full-chuc-nang.mp4</b>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="service">
+      <div class="section-title">
+        <h2>Dịch vụ khác</h2>
+        <p>Các dịch vụ cày thuê hoặc hỗ trợ thêm.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🎮</div>
+        <h3>Cày thuê</h3>
+        <p>Xem chi tiết các gói dịch vụ cày thuê.</p>
+        <a href="cay-thue.html" class="btn primary">Xem thêm</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 LAPBUFFXU.SITE - All rights reserved.
+  </footer>
+
+  <div class="chat-wrapper">
+    <div class="chat-box" id="chatBox">
+      <h3>Liên hệ admin</h3>
+      <p>Chọn nền tảng để nhắn admin mua key hoặc cần hỗ trợ.</p>
+
+      <a href="https://t.me/sjxxtenn03" target="_blank" class="chat-link telegram">Telegram</a>
+      <a href="https://zalo.me/0344792471" target="_blank" class="chat-link zalo">Zalo</a>
     </div>
 
+    <button class="chat-toggle" onclick="toggleChat()">💬</button>
   </div>
 
-  <section id="download">
-    <div class="section-title">
-      <h2>Link tải</h2>
-      <p>Chọn đúng phiên bản thiết bị để tải về.</p>
-    </div>
+  <script>
+    const ADMIN_NOTICE_MESSAGE = `Chào mừng bạn đến với LAPBUFFXU.SITE!
 
-    <div class="grid">
-      <div class="card">
-        <div class="icon">🤖</div>
-        <h3>Tool Android / ADR</h3>
-        <p>Phiên bản Android đã hoạt động lại. Bấm nút dưới để tải APK.</p>
-
-        <a href="https://www.mediafire.com/folder/zuzsysvc1veb2/ADR+MỚI+NHẤT"
-           class="btn primary"
-           target="_blank">
-          Tải Android / Máy Ảo
-        </a>
-      </div>
-
-      <div class="card">
-        <div class="icon">💻</div>
-        <h3>Tool PC</h3>
-        <p>Phiên bản dành cho Giả Lập.</p>
-
-        <a href="https://www.mediafire.com/folder/400s18qtwsp0y/module"
-           class="btn primary"
-           target="_blank">
-          Tải PC
-        </a>
-      </div>
-
-      <div class="card">
-        <div class="icon">🍎</div>
-        <h3>Cài cho iOS</h3>
-        <p>Phiên bản iOS đã hoạt động lại. Bấm nút dưới để cài.</p>
-
-        <a href="https://zalo.me/0344792471"
-           class="btn primary"
-           target="_blank">
-          Cài iOS
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section id="video">
-    <div class="section-title">
-      <h2>Video hướng dẫn</h2>
-      <p>Video Hướng Dẫn Cài Cho Mobile.</p>
-    </div>
-
-    <div class="video-box">
-      <video controls>
-        <source src="video-huong-dan.mp4" type="video/mp4">
-      </video>
-    </div>
-  </section>
-
-  <section id="service">
-    <div class="section-title">
-      <h2>Dịch vụ khác</h2>
-      <p>Cày Thuê Tất Cả Dịch Vụ Game.</p>
-    </div>
-
-    <div class="card">
-      <div class="icon">🎮</div>
-      <h3>Cày thuê</h3>
-      <p>Xem chi tiết dịch vụ cày thuê.</p>
-
-      <a href="cay-thue.html" class="btn primary">Xem thêm</a>
-    </div>
-  </section>
-
-  <section id="vip">
-    <div class="section-title">
-      <h2>Bảng giá key VIP</h2>
-      <p class="note">
-        Giá Android, PC, iOS khác nhau. Android và iOS chỉ bán key tuần/tháng. PC chỉ bán key ngày/tháng.
-        Hiện tại chỉ bán key 1 thiết bị. Muốn mua key vui lòng liên hệ admin.
-      </p>
-    </div>
-
-    <div class="grid">
-
-      <div class="platform-title">🤖 Android </div>
-
-      <div class="card key-card" data-price="60000" data-stock="available">
-        <div class="icon">📱</div>
-        <h3>ADR - Key 1 tuần</h3>
-        <div class="price">60.000đ</div>
-        <div class="key-info">Loại: Android / 1 thiết bị</div>
-        <div class="total-price"></div>
-        <a href="https://zalo.me/0344792471" target="_blank" class="btn primary">Liên hệ admin</a>
-      </div>
-
-      <div class="card key-card" data-price="160000" data-stock="available">
-        <div class="icon">📱</div>
-        <h3>ADR - Key 1 tháng</h3>
-        <div class="price">160.000đ</div>
-        <div class="key-info">Loại: Android / 1 thiết bị</div>
-        <div class="total-price"></div>
-        <a href="https://zalo.me/0344792471" target="_blank" class="btn primary">Liên hệ admin</a>
-      </div>
-
-      <div class="platform-title">🍎 iOS</div>
-
-      <div class="card key-card" data-price="100000" data-stock="available">
-        <div class="icon">🍎</div>
-        <h3>iOS - Key 1 tuần</h3>
-        <div class="price">100.000đ</div>
-        <div class="key-info">Loại: iOS / 1 thiết bị</div>
-        <div class="total-price"></div>
-        <a href="https://zalo.me/0344792471" target="_blank" class="btn primary">Liên hệ admin</a>
-      </div>
-
-      <div class="card key-card" data-price="260000" data-stock="available">
-        <div class="icon">🍎</div>
-        <h3>iOS - Key 1 tháng</h3>
-        <div class="price">260.000đ</div>
-        <div class="key-info">Loại: iOS / 1 thiết bị</div>
-        <div class="total-price"></div>
-        <a href="https://zalo.me/0344792471" target="_blank" class="btn primary">Liên hệ admin</a>
-      </div>
-
-      <div class="platform-title">💻 PC</div>
-
-      <div class="card key-card" data-price="10000" data-stock="available">
-        <div class="icon">⚡</div>
-        <h3>PC - Key 1 ngày</h3>
-        <div class="price">10.000đ</div>
-        <div class="key-info">Loại: PC / 1 thiết bị</div>
-        <div class="total-price"></div>
-        <a href="https://zalo.me/0344792471" target="_blank" class="btn primary">Liên hệ admin</a>
-      </div>
-
-      <div class="card key-card" data-price="150000" data-stock="available">
-        <div class="icon">🏆</div>
-        <h3>PC - Key 1 tháng</h3>
-        <div class="price">150.000đ</div>
-        <div class="key-info">Loại: PC / 1 thiết bị</div>
-        <div class="total-price"></div>
-        <a href="https://zalo.me/0344792471" target="_blank" class="btn primary">Liên hệ admin</a>
-      </div>
-
-      
-
-    </div>
-  </section>
-
-</div>
-
-<footer>
-  © 2026 LAPBUFFXU.SITE - All rights reserved.
-</footer>
-
-<div class="chat-wrapper">
-  <div class="chat-box" id="chatBox">
-    <h3>Liên hệ admin</h3>
-    <p>Chọn nền tảng để nhắn admin mua key hoặc cần hỗ trợ.</p>
-
-    <a href="https://t.me/sjxxtenn03" target="_blank" class="chat-link telegram">
-      Telegram
-    </a>
-
-    <a href="https://zalo.me/0344792471" target="_blank" class="chat-link zalo">
-      Zalo
-    </a>
-  </div>
-
-  <button class="chat-toggle" onclick="toggleChat()">💬</button>
-</div>
-
-<script>
-/* SỬA NỘI DUNG THÔNG BÁO ADMIN Ở ĐÂY */
-const ADMIN_NOTICE_MESSAGE = `Chào mừng bạn đến với LAPBUFFXU.SITE!
-
-THÔNG BÁO MỚI:
-- Android đã hoạt động lại
-- iOS đã hoạt động lại
-- PC vẫn hoạt động bình thường
-
-
-BẢNG GIÁ KEY VIP:
-- Android  : chỉ bán key 1 tuần và 1 tháng
-- iOS: chỉ bán key 1 tuần và 1 tháng
-- PC: chỉ bán key 1 ngày và 1 tháng
-
-Hiện tại chỉ bán key 1 thiết bị, không bán key nhiều thiết bị.
+THÔNG BÁO:
+- Website đã nâng cấp giao diện mới.
+- Chọn Android / iOS / PC để xem bảng giá riêng.
+- Hiện tại chỉ bán key 1 thiết bị.
 
 Muốn mua key hoặc cần hỗ trợ thì bấm nút liên hệ admin nhé.`;
 
-document.addEventListener("DOMContentLoaded", () => {
-  const notice = document.getElementById("adminNotice");
-  const noticeText = document.getElementById("noticeText");
+    document.addEventListener("DOMContentLoaded", () => {
+      const notice = document.getElementById("adminNotice");
+      const noticeText = document.getElementById("noticeText");
 
-  noticeText.textContent = ADMIN_NOTICE_MESSAGE;
-  notice.classList.add("active");
+      noticeText.textContent = ADMIN_NOTICE_MESSAGE;
+      notice.classList.add("active");
+    });
 
-  const keyCards = document.querySelectorAll(".key-card");
-
-  keyCards.forEach(card => {
-    const basePrice = Number(card.dataset.price);
-    const stock = card.dataset.stock;
-
-    const totalText = card.querySelector(".total-price");
-    const contactBtn = card.querySelector("a.btn");
-
-    const badge = document.createElement("div");
-    badge.className = "stock-badge " + stock;
-    badge.textContent = stock === "available" ? "✅ Còn hàng" : "❌ Hết hàng";
-
-    const title = card.querySelector("h3");
-    title.insertAdjacentElement("afterend", badge);
-
-    if(stock === "soldout"){
-      card.classList.add("soldout");
-      contactBtn.classList.remove("primary");
-      contactBtn.classList.add("disabled");
-      contactBtn.removeAttribute("href");
-      contactBtn.removeAttribute("target");
-      contactBtn.textContent = "Hết hàng";
-      totalText.innerHTML = "Tạm hết hàng";
-      return;
+    function closeNotice(){
+      document.getElementById("adminNotice").classList.remove("active");
     }
 
-    totalText.innerHTML =
-      "Tổng: " +
-      basePrice.toLocaleString("vi-VN") +
-      "đ";
-  });
-});
+    function toggleChat(){
+      document.getElementById("chatBox").classList.toggle("active");
+    }
 
-function closeNotice(){
-  document.getElementById("adminNotice").classList.remove("active");
-}
+    function openPanel(panelId){
+      const panels = document.querySelectorAll(".panel");
 
-function toggleChat(){
-  document.getElementById("chatBox").classList.toggle("active");
-}
-</script>
+      panels.forEach(panel => {
+        panel.classList.remove("active");
+      });
 
+      const currentPanel = document.getElementById(panelId);
+      currentPanel.classList.add("active");
+      currentPanel.scrollIntoView({ behavior:"smooth", block:"start" });
+    }
+
+    function closePanels(){
+      const panels = document.querySelectorAll(".panel");
+      panels.forEach(panel => panel.classList.remove("active"));
+    }
+  </script>
 </body>
 </html>

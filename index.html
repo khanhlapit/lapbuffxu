@@ -659,6 +659,211 @@
         width:260px;
       }
     }
+
+    /* ===== FIX RESPONSIVE MOBILE / PC ===== */
+    html, body{
+      width:100%;
+      max-width:100%;
+    }
+
+    img, video, iframe{
+      max-width:100%;
+      height:auto;
+    }
+
+    .container,
+    .nav,
+    .hero,
+    .hero-card,
+    .card,
+    .panel,
+    .video-box{
+      min-width:0;
+    }
+
+    .grid{
+      grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));
+    }
+
+    h1, h2, h3, p, span, a, button, div{
+      overflow-wrap:anywhere;
+      word-break:normal;
+    }
+
+    .btn{
+      text-align:center;
+      white-space:normal;
+    }
+
+    @media (hover:none){
+      .card:hover,
+      .btn:hover,
+      .links a:hover{
+        transform:none;
+      }
+    }
+
+    @media(max-width:768px){
+      .container{
+        padding:24px 14px;
+      }
+
+      section{
+        margin:46px 0;
+      }
+
+      .nav{
+        align-items:flex-start;
+      }
+
+      .links{
+        width:100%;
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:8px;
+      }
+
+      .links a{
+        width:100%;
+        text-align:center;
+        padding:10px 8px;
+        font-size:13px;
+      }
+
+      .hero{
+        gap:22px;
+      }
+
+      .hero h1{
+        font-size:40px;
+        line-height:1.08;
+        letter-spacing:-1.5px;
+      }
+
+      .hero p{
+        font-size:16px;
+      }
+
+      .actions{
+        display:grid;
+        grid-template-columns:1fr;
+      }
+
+      .actions .btn{
+        width:100%;
+      }
+
+      .hero-card{
+        min-height:auto;
+        padding:22px;
+        border-radius:28px;
+      }
+
+      .showcase-top{
+        margin-bottom:42px;
+      }
+
+      .showcase-title{
+        margin-bottom:26px;
+      }
+
+      .showcase-title h2{
+        font-size:38px;
+      }
+
+      .section-title h2{
+        font-size:30px;
+        line-height:1.15;
+      }
+
+      .card{
+        padding:20px;
+        border-radius:24px;
+      }
+
+      .card h3{
+        font-size:21px;
+        line-height:1.25;
+      }
+
+      .panel{
+        padding:16px;
+        border-radius:24px;
+      }
+
+      .panel-head{
+        display:block;
+      }
+
+      .panel-head .btn{
+        width:100%;
+        margin-top:14px;
+      }
+
+      .price{
+        font-size:28px;
+      }
+
+      .video-box{
+        padding:10px;
+        border-radius:22px;
+      }
+
+      video{
+        border-radius:16px;
+      }
+
+      .notice-box{
+        max-height:85vh;
+        overflow:auto;
+      }
+
+      .chat-wrapper{
+        right:14px;
+        bottom:14px;
+      }
+
+      .chat-toggle{
+        width:58px;
+        height:58px;
+      }
+    }
+
+    @media(max-width:420px){
+      .logo{
+        font-size:24px;
+      }
+
+      .hero h1{
+        font-size:34px;
+      }
+
+      .badge{
+        font-size:12px;
+      }
+
+      .links{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .mini-grid{
+        grid-template-columns:1fr;
+      }
+
+      .tag-row{
+        gap:6px;
+      }
+
+      .tag{
+        font-size:12px;
+      }
+
+      .chat-box{
+        width:calc(100vw - 28px);
+        right:0;
+      }
+    }
+
   </style>
 </head>
 
@@ -710,7 +915,7 @@
         </div>
 
         <div class="showcase-title">
-          <h2>VIP KEY</h2>
+          <h2>LAPBUFFXU.SITE</h2>
           <p>Android • iOS • PC</p>
         </div>
 

@@ -864,6 +864,128 @@
       }
     }
 
+    /* ===== THANH TOÁN NHANH VIETQR ===== */
+    .payment-overlay{
+      position:fixed;
+      inset:0;
+      background:#000000b8;
+      backdrop-filter:blur(8px);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:100000;
+      padding:16px;
+    }
+
+    .payment-overlay.active{
+      display:flex;
+    }
+
+    .payment-box{
+      width:100%;
+      max-width:450px;
+      max-height:90vh;
+      overflow:auto;
+      background:linear-gradient(180deg,#111827,#020617);
+      border:1px solid #ffffff22;
+      border-radius:28px;
+      padding:22px;
+      box-shadow:0 25px 80px #000;
+      animation:noticeZoom .25s ease;
+    }
+
+    .payment-box h2{
+      font-size:26px;
+      margin-bottom:10px;
+      background:linear-gradient(90deg,#60a5fa,#c084fc,#22c55e);
+      -webkit-background-clip:text;
+      color:transparent;
+    }
+
+    .payment-box p{
+      color:#dbeafe;
+      line-height:1.6;
+    }
+
+    .qr-img{
+      width:100%;
+      max-width:270px;
+      display:block;
+      margin:16px auto;
+      border-radius:18px;
+      background:white;
+      padding:10px;
+    }
+
+    .pay-info{
+      background:#ffffff0d;
+      border:1px solid #ffffff18;
+      border-radius:18px;
+      padding:14px;
+      margin:12px 0;
+      line-height:1.8;
+    }
+
+    .pay-info p{
+      margin:0;
+      color:#cbd5e1;
+    }
+
+    .pay-info b{
+      color:#86efac;
+    }
+
+    .pay-warning{
+      color:#facc15!important;
+      font-weight:800;
+      margin-top:8px;
+    }
+
+    .pay-actions{
+      display:grid;
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .pay-actions button,
+    .pay-actions a{
+      border:none;
+      text-align:center;
+      text-decoration:none;
+      padding:13px;
+      border-radius:16px;
+      color:white;
+      font-weight:900;
+      cursor:pointer;
+    }
+
+    .copy-btn{
+      background:linear-gradient(135deg,#2563eb,#9333ea);
+    }
+
+    .close-pay{
+      background:#334155;
+    }
+
+    .zalo-pay{
+      background:linear-gradient(135deg,#0068ff,#00b4ff);
+    }
+
+    .telegram-pay{
+      background:linear-gradient(135deg,#229ED9,#2563eb);
+    }
+
+    @media(max-width:420px){
+      .payment-box{
+        padding:18px;
+        border-radius:24px;
+      }
+
+      .qr-img{
+        max-width:240px;
+      }
+    }
+
   </style>
 </head>
 
@@ -1021,33 +1143,33 @@
             <div class="card">
               <h3>Key 1 ngày</h3>
               <div class="stock">✅ Còn hàng</div>
-              <div class="price">10.000</div>
+              <div class="price">10.000đ</div>
               <p>Loại: Android / 1 thiết bị</p>
-              <a href="https://zalo.me/0344792471" target="_blank" class="btn primary">Liên hệ admin</a>
+              <button class="btn primary" onclick="openPayment('Phiên Bản ADR Câu Cá - Đập Đá - Bắt Bọ - Key 1 ngày', 10000)">Thanh toán ngay</button>
             </div>
 
             <div class="card">
               <h3>Key 7 ngày</h3>
               <div class="stock">✅ Còn hàng</div>
-              <div class="price">45.000</div>
+              <div class="price">45.000đ</div>
               <p>Loại: Android / 1 thiết bị</p>
-              <a href="https://zalo.me/0344792471" target="_blank" class="btn primary">Liên hệ admin</a>
+              <button class="btn primary" onclick="openPayment('Phiên Bản ADR Câu Cá - Đập Đá - Bắt Bọ - Key 7 ngày', 45000)">Thanh toán ngay</button>
             </div>
 
             <div class="card">
               <h3>Key 14 ngày</h3>
-              <div class="stock">✅80.000</div>
-              <div class="price">Liên hệ</div>
+              <div class="stock">✅ Còn hàng</div>
+              <div class="price">80.000đ</div>
               <p>Loại: Android / 1 thiết bị</p>
-              <a href="https://zalo.me/0344792471" target="_blank" class="btn primary">Liên hệ admin</a>
+              <button class="btn primary" onclick="openPayment('Phiên Bản ADR Câu Cá - Đập Đá - Bắt Bọ - Key 14 ngày', 80000)">Thanh toán ngay</button>
             </div>
 
             <div class="card">
               <h3>Key 30 ngày</h3>
-              <div class="stock">✅ 140.000</div>
-              <div class="price">Liên hệ</div>
+              <div class="stock">✅ Còn hàng</div>
+              <div class="price">140.000đ</div>
               <p>Loại: Android / 1 thiết bị</p>
-              <a href="https://zalo.me/0344792471" target="_blank" class="btn primary">Liên hệ admin</a>
+              <button class="btn primary" onclick="openPayment('Phiên Bản ADR Câu Cá - Đập Đá - Bắt Bọ - Key 30 ngày', 140000)">Thanh toán ngay</button>
             </div>
           </div>
         </div>
@@ -1061,17 +1183,17 @@
             <div class="card">
               <h3>Key 7 ngày</h3>
               <div class="stock">✅ Còn hàng</div>
-              <div class="price">60.000</div>
+              <div class="price">60.000đ</div>
               <p>Loại: Android / 1 thiết bị</p>
-              <a href="https://zalo.me/0344792471" target="_blank" class="btn primary">Liên hệ admin</a>
+              <button class="btn primary" onclick="openPayment('Phiên Bản ADR Full Chức Năng - Key 7 ngày', 60000)">Thanh toán ngay</button>
             </div>
 
             <div class="card">
               <h3>Key 30 ngày</h3>
               <div class="stock">✅ Còn hàng</div>
-              <div class="price">160.000</div>
+              <div class="price">160.000đ</div>
               <p>Loại: Android / 1 thiết bị</p>
-              <a href="https://zalo.me/0344792471" target="_blank" class="btn primary">Liên hệ admin</a>
+              <button class="btn primary" onclick="openPayment('Phiên Bản ADR Full Chức Năng - Key 30 ngày', 160000)">Thanh toán ngay</button>
             </div>
           </div>
         </div>
@@ -1093,7 +1215,7 @@
             <div class="stock">✅ Còn hàng</div>
             <div class="price">100.000đ</div>
             <p>Loại: iOS / 1 thiết bị</p>
-            <a href="https://zalo.me/0344792471" target="_blank" class="btn primary">Liên hệ admin</a>
+            <button class="btn primary" onclick="openPayment('iOS - Key 1 tuần', 100000)">Thanh toán ngay</button>
           </div>
 
           <div class="card">
@@ -1102,7 +1224,7 @@
             <div class="stock">✅ Còn hàng</div>
             <div class="price">260.000đ</div>
             <p>Loại: iOS / 1 thiết bị</p>
-            <a href="https://zalo.me/0344792471" target="_blank" class="btn primary">Liên hệ admin</a>
+            <button class="btn primary" onclick="openPayment('iOS - Key 1 tháng', 260000)">Thanh toán ngay</button>
           </div>
         </div>
       </div>
@@ -1123,7 +1245,7 @@
             <div class="stock">✅ Còn hàng</div>
             <div class="price">10.000đ</div>
             <p>Loại: PC / 1 thiết bị</p>
-            <a href="https://zalo.me/0344792471" target="_blank" class="btn primary">Liên hệ admin</a>
+            <button class="btn primary" onclick="openPayment('PC - Key 1 ngày', 10000)">Thanh toán ngay</button>
           </div>
 
           <div class="card">
@@ -1132,7 +1254,7 @@
             <div class="stock">✅ Còn hàng</div>
             <div class="price">150.000đ</div>
             <p>Loại: PC / 1 thiết bị</p>
-            <a href="https://zalo.me/0344792471" target="_blank" class="btn primary">Liên hệ admin</a>
+            <button class="btn primary" onclick="openPayment('PC - Key 1 tháng', 150000)">Thanh toán ngay</button>
           </div>
         </div>
       </div>
@@ -1198,6 +1320,33 @@
     © 2026 LAPBUFFXU.SITE - All rights reserved.
   </footer>
 
+  <div class="payment-overlay" id="paymentModal">
+    <div class="payment-box">
+      <h2>💳 Thanh toán ngay</h2>
+      <p>Quét QR hoặc chuyển khoản đúng thông tin bên dưới.</p>
+
+      <img id="qrImage" class="qr-img" src="" alt="QR thanh toán">
+
+      <div class="pay-info">
+        <p>Ngân hàng: <b id="bankName">Vietcombank</b></p>
+        <p>Số tài khoản: <b id="accountNumber">1038301335</b></p>
+        <p>Chủ tài khoản: <b id="accountName">Ngô Xuân Khánh Lập</b></p>
+        <p>Gói mua: <b id="payProduct"></b></p>
+        <p>Số tiền: <b id="payAmount"></b></p>
+        <p>Nội dung CK: <b id="payContent"></b></p>
+        <p class="pay-warning">⚠️ Nhớ chuyển đúng nội dung để admin xác nhận nhanh.</p>
+      </div>
+
+      <div class="pay-actions">
+        <button class="copy-btn" onclick="copyPaymentContent()">Sao chép nội dung chuyển khoản</button>
+        <a class="zalo-pay" href="https://zalo.me/0344792471" target="_blank">Tôi đã chuyển khoản - Nhắn Zalo</a>
+        <a class="telegram-pay" href="https://t.me/sjxxtenn03" target="_blank">Tôi đã chuyển khoản - Nhắn Telegram</a>
+        <button class="close-pay" onclick="closePayment()">Đóng</button>
+      </div>
+    </div>
+  </div>
+
+
   <div class="chat-wrapper">
     <div class="chat-box" id="chatBox">
       <h3>Liên hệ admin</h3>
@@ -1218,7 +1367,7 @@ THÔNG BÁO:
 - Chọn Android / iOS / PC để xem bảng giá riêng.
 - Hiện tại chỉ bán key 1 thiết bị.
 
-Muốn mua key hoặc cần hỗ trợ thì bấm nút liên hệ admin nhé.`;
+Muốn mua key thì bấm nút Thanh toán ngay ở gói cần mua nhé.`;
 
     document.addEventListener("DOMContentLoaded", () => {
       const notice = document.getElementById("adminNotice");
@@ -1252,6 +1401,108 @@ Muốn mua key hoặc cần hỗ trợ thì bấm nút liên hệ admin nhé.`;
       const panels = document.querySelectorAll(".panel");
       panels.forEach(panel => panel.classList.remove("active"));
     }
+    function openPayment(productName, amount){
+      let prefix = "ORDER";
+      const bankCode = "VCB";
+      const accountNumber = "1038301335";
+      const accountName = "Ngo Xuan Khanh Lap";
+
+
+if(productName.includes("Câu Cá - Đập Đá - Bắt Bọ") && productName.includes("1 ngày"))
+    prefix = "ADR1-1DAY";
+
+else if(productName.includes("Câu Cá - Đập Đá - Bắt Bọ") && productName.includes("7 ngày"))
+    prefix = "ADR1-7DAY";
+
+else if(productName.includes("Câu Cá - Đập Đá - Bắt Bọ") && productName.includes("14 ngày"))
+    prefix = "ADR1-14DAY";
+
+else if(productName.includes("Câu Cá - Đập Đá - Bắt Bọ") && productName.includes("30 ngày"))
+    prefix = "ADR1-30DAY";
+
+else if(productName.includes("Full Chức Năng") && productName.includes("7 ngày"))
+    prefix = "ADR2-7DAY";
+
+else if(productName.includes("Full Chức Năng") && productName.includes("30 ngày"))
+    prefix = "ADR2-30DAY";
+
+else if(productName.includes("iOS") && productName.includes("1 tuần"))
+    prefix = "IOS-7DAY";
+
+else if(productName.includes("iOS") && productName.includes("1 tháng"))
+    prefix = "IOS-30DAY";
+
+else if(productName.includes("PC") && productName.includes("1 ngày"))
+    prefix = "PC-1DAY";
+
+else if(productName.includes("PC") && productName.includes("1 tháng"))
+    prefix = "PC-30DAY";
+
+const orderCode = prefix + "-" + Math.floor(1000 + Math.random() * 9000);
+      document.getElementById("payProduct").textContent = productName;
+      document.getElementById("payAmount").textContent = amount.toLocaleString("vi-VN") + "đ";
+      document.getElementById("payContent").textContent = orderCode;
+
+      const qrUrl =
+        `https://img.vietqr.io/image/${bankCode}-${accountNumber}-compact2.png?amount=${amount}&addInfo=${encodeURIComponent(orderCode)}&accountName=${encodeURIComponent(accountName)}`;
+
+      document.getElementById("qrImage").src = qrUrl;
+      document.getElementById("paymentModal").classList.add("active");
+    }
+
+    function closePayment(){
+      document.getElementById("paymentModal").classList.remove("active");
+    }
+
+    function copyPaymentContent(){
+      const content = document.getElementById("payContent").textContent;
+
+      navigator.clipboard.writeText(content).then(() => {
+        alert("Đã sao chép nội dung chuyển khoản: " + content);
+      }).catch(() => {
+        alert("Nội dung chuyển khoản: " + content);
+      });
+    }
+
+    document.addEventListener("click", (event) => {
+      const modal = document.getElementById("paymentModal");
+      if(event.target === modal){
+        closePayment();
+      }
+    });
+document.addEventListener("click", (event) => {
+  const modal = document.getElementById("paymentModal");
+  if(event.target === modal){
+    closePayment();
+  }
+});
+
+/* DÁN Ở ĐÂY */
+
+document.addEventListener("contextmenu", function(e){
+  e.preventDefault();
+});
+
+document.addEventListener("keydown", function(e){
+  if(
+    e.key === "F12" ||
+    (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "i") ||
+    (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "j") ||
+    (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "c") ||
+    (e.ctrlKey && e.key.toLowerCase() === "u")
+  ){
+    e.preventDefault();
+    return false;
+  }
+});
+
+document.addEventListener("selectstart", function(e){
+  e.preventDefault();
+});
+
+</script>
+</body>
+</html>
   </script>
 </body>
 </html>

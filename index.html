@@ -1242,18 +1242,18 @@
           <div class="grid">
             <div class="card">
               <h3>Key 1 ngày</h3>
-              <div class="stock">✅ TẠM HẾT</div>
+              <div class="stock">✅ Còn hàng</div>
               <div class="price">10.000đ</div>
               <p>Loại: Android / 1 thiết bị</p>
-              <button class="btn primary disabled" disabled>Tạm hết hàng</button>
+              <button class="btn primary" onclick="openPayment('Phiên Bản ADR Câu Cá - Đập Đá - Bắt Bọ - Key 1 ngày', 10000)">Thanh toán ngay</button>
             </div>
 
             <div class="card">
               <h3>Key 7 ngày</h3>
-              <div class="stock">✅ TẠM HẾT</div>
-              <div class="price">45.000đ</div>
+              <div class="stock">✅ Còn hàng</div>
+              <div class="price">50.000đ</div>
               <p>Loại: Android / 1 thiết bị</p>
-              <button class="btn primary disabled" disabled>Tạm hết hàng</button>
+              <button class="btn primary" onclick="openPayment('Phiên Bản ADR Câu Cá - Đập Đá - Bắt Bọ - Key 7 ngày', 50000)">Thanh toán ngay</button>
             </div>
 
             <div class="card">
@@ -1266,10 +1266,10 @@
 
             <div class="card">
               <h3>Key 30 ngày</h3>
-              <div class="stock">✅ TẠM HẾT</div>
-              <div class="price">140.000đ</div>
+              <div class="stock">✅ Còn hàng</div>
+              <div class="price">150.000đ</div>
               <p>Loại: Android / 1 thiết bị</p>
-              <button class="btn primary disabled" disabled>Tạm hết hàng</button>
+              <button class="btn primary" onclick="openPayment('Phiên Bản ADR Câu Cá - Đập Đá - Bắt Bọ - Key 30 ngày', 150000)">Thanh toán ngay</button>
             </div>
           </div>
         </div>
@@ -1333,28 +1333,48 @@
         <div class="panel-head">
           <div>
             <h2>💻 PC</h2>
-            <p>Bảng giá dành cho PC hoặc giả lập. Hiện tại chỉ bán key 1 thiết bị.</p>
+            <p>PC dùng chung key với bản ADR Câu Cá - Đập Đá - Bắt Bọ. Hiện tại chỉ bán key 1 thiết bị.</p>
           </div>
           <button class="btn secondary" onclick="closePanels()">Đóng bảng</button>
         </div>
 
-        <div class="grid">
-          <div class="card">
-            <div class="icon">⚡</div>
-            <h3>PC - Key 1 ngày</h3>
-            <div class="stock">✅ TẠM HẾT</div>
-            <div class="price">10.000đ</div>
-            <p>Loại: PC / 1 thiết bị</p>
-            <button class="btn primary disabled" disabled>Tạm hết hàng</button>
-          </div>
+        <div class="card">
+          <div class="icon">💻</div>
+          <h3>PC / Giả lập - Câu Cá - Đập Đá - Bắt Bọ</h3>
+          <p>Key PC và ADR bản cơ bản dùng chung được.</p>
 
-          <div class="card">
-            <div class="icon">🏆</div>
-            <h3>PC - Key 2 tháng</h3>
-            <div class="stock">✅ Hết Hàng</div>
-            <div class="price">180.000đ</div>
-            <p>Loại: PC / 1 thiết bị</p>
-            <button class="btn primary disabled" disabled>Hết hàng</button>
+          <div class="grid">
+            <div class="card">
+              <h3>PC - Key 1 ngày</h3>
+              <div class="stock">✅ Còn hàng</div>
+              <div class="price">10.000đ</div>
+              <p>Loại: PC / 1 thiết bị</p>
+              <button class="btn primary" onclick="openPayment('PC - Key 1 ngày', 10000)">Thanh toán ngay</button>
+            </div>
+
+            <div class="card">
+              <h3>PC - Key 7 ngày</h3>
+              <div class="stock">✅ Còn hàng</div>
+              <div class="price">50.000đ</div>
+              <p>Loại: PC / 1 thiết bị</p>
+              <button class="btn primary" onclick="openPayment('PC - Key 7 ngày', 50000)">Thanh toán ngay</button>
+            </div>
+
+            <div class="card">
+              <h3>PC - Key 14 ngày</h3>
+              <div class="stock">✅ TẠM HẾT</div>
+              <div class="price">80.000đ</div>
+              <p>Loại: PC / 1 thiết bị</p>
+              <button class="btn primary disabled" disabled>Tạm hết hàng</button>
+            </div>
+
+            <div class="card">
+              <h3>PC - Key 1 tháng</h3>
+              <div class="stock">✅ Còn hàng</div>
+              <div class="price">150.000đ</div>
+              <p>Loại: PC / 1 thiết bị</p>
+              <button class="btn primary" onclick="openPayment('PC - Key 1 tháng', 150000)">Thanh toán ngay</button>
+            </div>
           </div>
         </div>
       </div>
@@ -1546,8 +1566,14 @@ else if(productName.includes("iOS") && productName.includes("1 tháng"))
 else if(productName.includes("PC") && productName.includes("1 ngày"))
     prefix = "PC-1DAY";
 
-else if(productName.includes("PC") && productName.includes("2 tháng"))
-    prefix = "PC-60DAY";
+else if(productName.includes("PC") && productName.includes("7 ngày"))
+    prefix = "PC-7DAY";
+
+else if(productName.includes("PC") && productName.includes("14 ngày"))
+    prefix = "PC-14DAY";
+
+else if(productName.includes("PC") && productName.includes("1 tháng"))
+    prefix = "PC-30DAY";
 
 const orderCode = prefix + "-" + Math.floor(1000 + Math.random() * 9000);
       document.getElementById("payProduct").textContent = productName;

@@ -1046,7 +1046,7 @@
         </div>
 
         <div class="showcase-title">
-          <h2>LAPBUFFXU.SITE</h2>
+          <h2>/h2>
           <p>ADR1 • ADR2 • iOS • PC</p>
         </div>
 
@@ -1310,20 +1310,29 @@
           <p>Bản ADR2 phù hợp khách cần nhiều chức năng hơn.</p>
 
           <div class="grid">
+
+            <div class="card">
+              <h3>ADR2 - Key 1 ngày</h3>
+              <div class="stock">✅ Còn hàng</div>
+              <div class="price">15.000đ</div>
+              <p>Loại: ADR2 / Android / 1 thiết bị</p>
+              <button class="btn primary" onclick="openPayment('Phiên Bản ADR Full Chức Năng - Key 1 ngày', 15000)">Thanh toán ADR2</button>
+            </div>
+
             <div class="card">
               <h3>ADR2 - Key 7 ngày</h3>
               <div class="stock">✅ Còn hàng</div>
-              <div class="price">60.000đ</div>
+              <div class="price">80.000đ</div>
               <p>Loại: ADR2 / Android / 1 thiết bị</p>
-              <button class="btn primary" onclick="openPayment('Phiên Bản ADR Full Chức Năng - Key 7 ngày', 60000)">Thanh toán ADR2</button>
+              <button class="btn primary" onclick="openPayment('Phiên Bản ADR Full Chức Năng - Key 7 ngày', 80000)">Thanh toán ADR2</button>
             </div>
 
             <div class="card">
               <h3>ADR2 - Key 30 ngày</h3>
               <div class="stock">✅ Còn hàng</div>
-              <div class="price">160.000đ</div>
+              <div class="price">150.000đ</div>
               <p>Loại: ADR2 / Android / 1 thiết bị</p>
-              <button class="btn primary" onclick="openPayment('Phiên Bản ADR Full Chức Năng - Key 30 ngày', 160000)">Thanh toán ADR2</button>
+              <button class="btn primary" onclick="openPayment('Phiên Bản ADR Full Chức Năng - Key 30 ngày', 150000)">Thanh toán ADR2</button>
             </div>
           </div>
         </div>
@@ -1580,6 +1589,9 @@ else if(productName.includes("Câu Cá - Đập Đá - Bắt Bọ") && productNa
 
 else if(productName.includes("Câu Cá - Đập Đá - Bắt Bọ") && productName.includes("30 ngày"))
     prefix = "ADR1-30DAY";
+
+else if(productName.includes("Full Chức Năng") && productName.includes("1 ngày"))
+    prefix = "ADR2-1DAY";
 
 else if(productName.includes("Full Chức Năng") && productName.includes("7 ngày"))
     prefix = "ADR2-7DAY";

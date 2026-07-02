@@ -3,1682 +3,347 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LAPBUFFXU</title>
-
+  <title>Tiện Ích Online</title>
   <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family:Inter,Arial,sans-serif;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    html{
-      scroll-behavior:smooth;
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #fff;
+      min-height: 100vh;
     }
 
-    body{
-      min-height:100vh;
-      color:white;
-      overflow-x:hidden;
-      background:
-        radial-gradient(circle at top left,#2563eb55,transparent 32%),
-        radial-gradient(circle at top right,#9333ea55,transparent 32%),
-        linear-gradient(180deg,#020617,#0f172a 45%,#020617);
+    header {
+      padding: 22px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.9);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(12px);
     }
 
-    .bg-grid{
-      position:fixed;
-      inset:0;
-      background-image:
-        linear-gradient(#ffffff08 1px,transparent 1px),
-        linear-gradient(90deg,#ffffff08 1px,transparent 1px);
-      background-size:45px 45px;
-      pointer-events:none;
-      z-index:0;
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
     }
 
-    .container{
-      width:100%;
-      max-width:1200px;
-      margin:auto;
-      padding:38px 16px;
-      position:relative;
-      z-index:1;
+    .logo span {
+      color: #38bdf8;
     }
 
-    header{
-      position:sticky;
-      top:0;
-      z-index:999;
-      background:#020617cc;
-      backdrop-filter:blur(16px);
-      border-bottom:1px solid #ffffff14;
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 15px;
     }
 
-    .nav{
-      max-width:1200px;
-      margin:auto;
-      padding:15px 16px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
+    nav a:hover {
+      color: #38bdf8;
     }
 
-    .logo{
-      font-size:28px;
-      font-weight:950;
-      letter-spacing:1px;
-      background:linear-gradient(90deg,#60a5fa,#c084fc,#22c55e);
-      -webkit-background-clip:text;
-      color:transparent;
-      white-space:nowrap;
+    .hero {
+      padding: 70px 8% 40px;
+      text-align: center;
     }
 
-    .links{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      justify-content:center;
+    .hero h1 {
+      font-size: 42px;
+      margin-bottom: 15px;
     }
 
-    .links a{
-      color:#dbeafe;
-      text-decoration:none;
-      padding:9px 14px;
-      border-radius:999px;
-      background:#ffffff0b;
-      border:1px solid #ffffff14;
-      transition:.25s;
-      font-weight:700;
-      font-size:14px;
+    .hero h1 span {
+      color: #38bdf8;
     }
 
-    .links a:hover{
-      background:#2563eb;
-      transform:translateY(-2px);
+    .hero p {
+      color: #94a3b8;
+      max-width: 650px;
+      margin: auto;
+      line-height: 1.6;
     }
 
-    .hero{
-      min-height:650px;
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      align-items:center;
-      gap:36px;
+    .search-box {
+      margin: 30px auto 0;
+      max-width: 600px;
+      display: flex;
+      background: #1e293b;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      overflow: hidden;
     }
 
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 14px;
-      border-radius:999px;
-      background:#22c55e1a;
-      color:#86efac;
-      border:1px solid #22c55e44;
-      margin-bottom:22px;
-      font-weight:800;
-      font-size:14px;
+    .search-box input {
+      flex: 1;
+      padding: 16px;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: white;
+      font-size: 16px;
     }
 
-    .hero h1{
-      font-size:64px;
-      line-height:1;
-      letter-spacing:-3px;
-      margin-bottom:20px;
+    .search-box button {
+      padding: 0 22px;
+      border: none;
+      background: #38bdf8;
+      color: #0f172a;
+      font-weight: bold;
+      cursor: pointer;
     }
 
-    .hero h1 span{
-      background:linear-gradient(90deg,#60a5fa,#c084fc,#22c55e);
-      -webkit-background-clip:text;
-      color:transparent;
+    .container {
+      padding: 25px 8% 60px;
     }
 
-    .hero p{
-      color:#cbd5e1;
-      font-size:18px;
-      line-height:1.75;
-      max-width:640px;
-      margin-bottom:26px;
+    details {
+      background: #111827;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      margin-bottom: 18px;
+      overflow: hidden;
     }
 
-    .actions{
-      display:flex;
-      gap:14px;
-      flex-wrap:wrap;
+    summary {
+      padding: 20px;
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: bold;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    .btn{
-      display:inline-flex;
-      justify-content:center;
-      align-items:center;
-      gap:8px;
-      padding:14px 22px;
-      border-radius:18px;
-      text-decoration:none;
-      color:white;
-      font-weight:900;
-      transition:.25s;
-      border:1px solid #ffffff16;
-      cursor:pointer;
-      outline:none;
+    summary::after {
+      content: "＋";
+      color: #38bdf8;
+      font-size: 22px;
     }
 
-    .btn.primary{
-      background:linear-gradient(135deg,#2563eb,#9333ea);
-      box-shadow:0 14px 40px #2563eb55;
+    details[open] summary::after {
+      content: "－";
     }
 
-    .btn.secondary{
-      background:#ffffff0d;
+    .tools-grid {
+      padding: 0 20px 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 18px;
     }
 
-    .btn:hover{
-      transform:translateY(-4px);
+    .tool-card {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 16px;
+      text-decoration: none;
+      color: white;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: 0.25s;
     }
 
-    .btn.disabled,
-    .btn:disabled{
-      opacity:.45;
-      cursor:not-allowed;
-      pointer-events:none;
-      filter:grayscale(1);
+    .tool-card:hover {
+      transform: translateY(-5px);
+      border-color: #38bdf8;
+      box-shadow: 0 10px 25px rgba(56,189,248,0.12);
     }
 
-    .hero-card{
-      position:relative;
-      overflow:hidden;
-      min-height:435px;
-      border-radius:36px;
-      padding:28px;
-      background:
-        linear-gradient(145deg,#ffffff18,#ffffff08),
-        radial-gradient(circle at top right,#9333ea66,transparent 35%),
-        radial-gradient(circle at bottom left,#2563eb66,transparent 35%);
-      border:1px solid #ffffff18;
-      box-shadow:0 25px 70px #0008;
-      backdrop-filter:blur(18px);
+    .tool-card .icon {
+      font-size: 32px;
+      margin-bottom: 12px;
     }
 
-    .circle{
-      position:absolute;
-      border-radius:50%;
-      filter:blur(6px);
+    .tool-card h3 {
+      margin-bottom: 8px;
+      font-size: 18px;
     }
 
-    .circle.one{
-      width:190px;
-      height:190px;
-      background:#2563eb;
-      right:-60px;
-      top:-60px;
+    .tool-card p {
+      color: #94a3b8;
+      font-size: 14px;
+      line-height: 1.5;
     }
 
-    .circle.two{
-      width:150px;
-      height:150px;
-      background:#22c55e;
-      left:-50px;
-      bottom:-50px;
+    .tag {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 6px 10px;
+      background: rgba(56,189,248,0.12);
+      color: #38bdf8;
+      border-radius: 999px;
+      font-size: 12px;
     }
 
-    .showcase-top{
-      position:relative;
-      z-index:2;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-bottom:70px;
-      color:#dbeafe;
-      font-weight:800;
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #64748b;
+      border-top: 1px solid rgba(255,255,255,0.08);
     }
 
-    .showcase-top b{
-      background:#22c55e22;
-      border:1px solid #22c55e55;
-      color:#86efac;
-      padding:8px 14px;
-      border-radius:999px;
-      font-size:13px;
-    }
-
-    .showcase-title{
-      position:relative;
-      z-index:2;
-      text-align:center;
-      margin-bottom:42px;
-    }
-
-    .showcase-title h2{
-      font-size:52px;
-      letter-spacing:1px;
-      margin-bottom:10px;
-      background:linear-gradient(90deg,#60a5fa,#c084fc,#22c55e);
-      -webkit-background-clip:text;
-      color:transparent;
-    }
-
-    .showcase-title p{
-      color:#cbd5e1;
-      margin:0;
-    }
-
-    .mini-grid{
-      position:relative;
-      z-index:2;
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:14px;
-    }
-
-    .mini-card{
-      padding:18px;
-      border-radius:20px;
-      background:#02061799;
-      border:1px solid #ffffff18;
-    }
-
-    .mini-card strong{
-      display:block;
-      font-size:18px;
-      margin-bottom:7px;
-    }
-
-    .mini-card span{
-      color:#94a3b8;
-      font-size:14px;
-    }
-
-    section{
-      margin:70px 0;
-    }
-
-    .section-title{
-      margin-bottom:24px;
-    }
-
-    .section-title h2{
-      font-size:38px;
-      margin-bottom:10px;
-    }
-
-    .section-title p{
-      color:#94a3b8;
-      line-height:1.7;
-      max-width:720px;
-    }
-
-    .note{
-      color:#facc15!important;
-      font-weight:800;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:20px;
-    }
-
-    .card{
-      background:linear-gradient(180deg,#ffffff12,#ffffff08);
-      border:1px solid #ffffff16;
-      border-radius:28px;
-      padding:24px;
-      transition:.25s;
-      backdrop-filter:blur(12px);
-      box-shadow:0 18px 45px #0006;
-    }
-
-    .card:hover{
-      transform:translateY(-8px);
-      border-color:#60a5fa88;
-    }
-
-    .icon{
-      width:60px;
-      height:60px;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      font-size:28px;
-      border-radius:20px;
-      margin-bottom:18px;
-      background:linear-gradient(135deg,#2563eb,#9333ea);
-      box-shadow:0 12px 30px #2563eb44;
-    }
-
-    .card h3{
-      font-size:24px;
-      margin-bottom:12px;
-    }
-
-    .card p{
-      color:#cbd5e1;
-      line-height:1.7;
-      margin-bottom:18px;
-    }
-
-    .version-card{
-      cursor:pointer;
-      position:relative;
-      overflow:hidden;
-    }
-
-    .version-card::after{
-      content:"";
-      position:absolute;
-      width:160px;
-      height:160px;
-      right:-70px;
-      top:-70px;
-      border-radius:50%;
-      background:#60a5fa33;
-      transition:.25s;
-    }
-
-    .version-card:hover::after{
-      transform:scale(1.35);
-    }
-
-    .tag-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-bottom:18px;
-    }
-
-    .tag{
-      padding:7px 11px;
-      border-radius:999px;
-      font-size:13px;
-      font-weight:900;
-      background:#ffffff0d;
-      border:1px solid #ffffff18;
-      color:#dbeafe;
-    }
-
-    .panel{
-      display:none;
-      margin-top:28px;
-      padding:24px;
-      border-radius:30px;
-      background:#020617a6;
-      border:1px solid #ffffff18;
-      box-shadow:0 18px 55px #0008;
-      animation:panelShow .25s ease;
-    }
-
-    .panel.active{
-      display:block;
-    }
-
-    @keyframes panelShow{
-      from{
-        opacity:0;
-        transform:translateY(18px);
-      }
-      to{
-        opacity:1;
-        transform:translateY(0);
-      }
-    }
-
-    .panel-head{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:16px;
-      margin-bottom:22px;
-      flex-wrap:wrap;
-    }
-
-    .panel-head h2{
-      font-size:32px;
-      margin-bottom:8px;
-    }
-
-    .panel-head p{
-      color:#94a3b8;
-      line-height:1.6;
-    }
-
-    .price{
-      font-size:30px;
-      font-weight:950;
-      color:#86efac;
-      margin-bottom:10px;
-    }
-
-    .stock{
-      display:inline-flex;
-      padding:7px 12px;
-      border-radius:999px;
-      font-size:13px;
-      font-weight:950;
-      margin-bottom:12px;
-      background:#22c55e22;
-      color:#86efac;
-      border:1px solid #22c55e66;
-    }
-
-    .video-box{
-      background:linear-gradient(180deg,#ffffff12,#ffffff08);
-      border:1px solid #ffffff16;
-      border-radius:30px;
-      padding:18px;
-      box-shadow:0 18px 55px #0008;
-    }
-
-    video{
-      width:100%;
-      border-radius:22px;
-      background:black;
-      display:block;
-    }
-
-    .notice-overlay{
-      position:fixed;
-      inset:0;
-      background:#000000aa;
-      backdrop-filter:blur(8px);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      z-index:99999;
-      padding:16px;
-    }
-
-    .notice-overlay.active{
-      display:flex;
-    }
-
-    .notice-box{
-      width:100%;
-      max-width:430px;
-      background:linear-gradient(180deg,#111827,#020617);
-      border:1px solid #ffffff22;
-      border-radius:28px;
-      padding:24px;
-      box-shadow:0 25px 80px #000;
-      animation:noticeZoom .25s ease;
-    }
-
-    @keyframes noticeZoom{
-      from{
-        opacity:0;
-        transform:scale(.92) translateY(20px);
-      }
-      to{
-        opacity:1;
-        transform:scale(1) translateY(0);
-      }
-    }
-
-    .notice-box h2{
-      font-size:26px;
-      margin-bottom:12px;
-      background:linear-gradient(90deg,#60a5fa,#c084fc,#22c55e);
-      -webkit-background-clip:text;
-      color:transparent;
-    }
-
-    .notice-box p{
-      color:#dbeafe;
-      line-height:1.7;
-      white-space:pre-line;
-      margin-bottom:20px;
-    }
-
-    .notice-close{
-      width:100%;
-      border:none;
-      padding:14px;
-      border-radius:16px;
-      color:white;
-      font-weight:950;
-      cursor:pointer;
-      background:linear-gradient(135deg,#2563eb,#9333ea);
-      box-shadow:0 12px 35px #2563eb55;
-    }
-
-    .chat-wrapper{
-      position:fixed;
-      right:20px;
-      bottom:20px;
-      z-index:9999;
-    }
-
-    .chat-toggle{
-      width:64px;
-      height:64px;
-      border-radius:50%;
-      border:none;
-      cursor:pointer;
-      color:white;
-      font-size:28px;
-      background:linear-gradient(135deg,#2563eb,#9333ea);
-      box-shadow:0 12px 35px #2563eb88;
-      animation:chatFloat 2s infinite;
-    }
-
-    @keyframes chatFloat{
-      0%{transform:translateY(0)}
-      50%{transform:translateY(-8px)}
-      100%{transform:translateY(0)}
-    }
-
-    .chat-box{
-      position:absolute;
-      right:0;
-      bottom:78px;
-      width:280px;
-      background:linear-gradient(180deg,#111827,#020617);
-      border:1px solid #ffffff18;
-      border-radius:24px;
-      padding:18px;
-      box-shadow:0 20px 60px #0009;
-      display:none;
-    }
-
-    .chat-box.active{
-      display:block;
-    }
-
-    .chat-box h3{
-      font-size:20px;
-      margin-bottom:8px;
-    }
-
-    .chat-box p{
-      color:#cbd5e1;
-      font-size:14px;
-      line-height:1.5;
-      margin-bottom:14px;
-    }
-
-    .chat-link{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      width:100%;
-      padding:12px;
-      margin-top:10px;
-      border-radius:14px;
-      text-decoration:none;
-      color:white;
-      font-weight:900;
-      transition:.25s;
-    }
-
-    .chat-link.telegram{
-      background:linear-gradient(135deg,#229ED9,#2563eb);
-    }
-
-    .chat-link.zalo{
-      background:linear-gradient(135deg,#0068ff,#00b4ff);
-    }
-
-    footer{
-      margin-top:80px;
-      padding:30px 16px;
-      text-align:center;
-      color:#94a3b8;
-      border-top:1px solid #ffffff14;
-      position:relative;
-      z-index:1;
-    }
-
-    @media(max-width:900px){
-      .hero{
-        grid-template-columns:1fr;
-        min-height:auto;
-        padding-top:20px;
+    @media (max-width: 700px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
       }
 
-      .hero h1{
-        font-size:46px;
+      nav a {
+        margin: 0 8px;
+      }
+
+      .hero h1 {
+        font-size: 31px;
+      }
+
+      .search-box {
+        flex-direction: column;
+      }
+
+      .search-box button {
+        padding: 14px;
       }
     }
-
-    @media(max-width:600px){
-      .nav{
-        flex-direction:column;
-      }
-
-      .hero h1{
-        font-size:38px;
-        letter-spacing:-2px;
-      }
-
-      .section-title h2{
-        font-size:31px;
-      }
-
-      .showcase-title h2{
-        font-size:40px;
-      }
-
-      .mini-grid{
-        grid-template-columns:1fr;
-      }
-
-      .chat-box{
-        width:260px;
-      }
-    }
-
-    /* ===== FIX RESPONSIVE MOBILE / PC ===== */
-    html, body{
-      width:100%;
-      max-width:100%;
-    }
-
-    img, video, iframe{
-      max-width:100%;
-      height:auto;
-    }
-
-    .container,
-    .nav,
-    .hero,
-    .hero-card,
-    .card,
-    .panel,
-    .video-box{
-      min-width:0;
-    }
-
-    .grid{
-      grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));
-    }
-
-    h1, h2, h3, p, span, a, button, div{
-      overflow-wrap:anywhere;
-      word-break:normal;
-    }
-
-    .btn{
-      text-align:center;
-      white-space:normal;
-    }
-
-    @media (hover:none){
-      .card:hover,
-      .btn:hover,
-      .links a:hover{
-        transform:none;
-      }
-    }
-
-    @media(max-width:768px){
-      .container{
-        padding:24px 14px;
-      }
-
-      section{
-        margin:46px 0;
-      }
-
-      .nav{
-        align-items:flex-start;
-      }
-
-      .links{
-        width:100%;
-        display:grid;
-        grid-template-columns:1fr 1fr;
-        gap:8px;
-      }
-
-      .links a{
-        width:100%;
-        text-align:center;
-        padding:10px 8px;
-        font-size:13px;
-      }
-
-      .hero{
-        gap:22px;
-      }
-
-      .hero h1{
-        font-size:40px;
-        line-height:1.08;
-        letter-spacing:-1.5px;
-      }
-
-      .hero p{
-        font-size:16px;
-      }
-
-      .actions{
-        display:grid;
-        grid-template-columns:1fr;
-      }
-
-      .actions .btn{
-        width:100%;
-      }
-
-      .hero-card{
-        min-height:auto;
-        padding:22px;
-        border-radius:28px;
-      }
-
-      .showcase-top{
-        margin-bottom:42px;
-      }
-
-      .showcase-title{
-        margin-bottom:26px;
-      }
-
-      .showcase-title h2{
-        font-size:38px;
-      }
-
-      .section-title h2{
-        font-size:30px;
-        line-height:1.15;
-      }
-
-      .card{
-        padding:20px;
-        border-radius:24px;
-      }
-
-      .card h3{
-        font-size:21px;
-        line-height:1.25;
-      }
-
-      .panel{
-        padding:16px;
-        border-radius:24px;
-      }
-
-      .panel-head{
-        display:block;
-      }
-
-      .panel-head .btn{
-        width:100%;
-        margin-top:14px;
-      }
-
-      .price{
-        font-size:28px;
-      }
-
-      .video-box{
-        padding:10px;
-        border-radius:22px;
-      }
-
-      video{
-        border-radius:16px;
-      }
-
-      .notice-box{
-        max-height:85vh;
-        overflow:auto;
-      }
-
-      .chat-wrapper{
-        right:14px;
-        bottom:14px;
-      }
-
-      .chat-toggle{
-        width:58px;
-        height:58px;
-      }
-    }
-
-    @media(max-width:420px){
-      .logo{
-        font-size:24px;
-      }
-
-      .hero h1{
-        font-size:34px;
-      }
-
-      .badge{
-        font-size:12px;
-      }
-
-      .links{
-        grid-template-columns:1fr 1fr;
-      }
-
-      .mini-grid{
-        grid-template-columns:1fr;
-      }
-
-      .tag-row{
-        gap:6px;
-      }
-
-      .tag{
-        font-size:12px;
-      }
-
-      .chat-box{
-        width:calc(100vw - 28px);
-        right:0;
-      }
-    }
-
-    /* ===== THANH TOÁN NHANH VIETQR ===== */
-    .payment-overlay{
-      position:fixed;
-      inset:0;
-      background:#000000b8;
-      backdrop-filter:blur(8px);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      z-index:100000;
-      padding:16px;
-    }
-
-    .payment-overlay.active{
-      display:flex;
-    }
-
-    .payment-box{
-      width:100%;
-      max-width:450px;
-      max-height:90vh;
-      overflow:auto;
-      background:linear-gradient(180deg,#111827,#020617);
-      border:1px solid #ffffff22;
-      border-radius:28px;
-      padding:22px;
-      box-shadow:0 25px 80px #000;
-      animation:noticeZoom .25s ease;
-    }
-
-    .payment-box h2{
-      font-size:26px;
-      margin-bottom:10px;
-      background:linear-gradient(90deg,#60a5fa,#c084fc,#22c55e);
-      -webkit-background-clip:text;
-      color:transparent;
-    }
-
-    .payment-box p{
-      color:#dbeafe;
-      line-height:1.6;
-    }
-
-    .qr-img{
-      width:100%;
-      max-width:270px;
-      display:block;
-      margin:16px auto;
-      border-radius:18px;
-      background:white;
-      padding:10px;
-    }
-
-    .pay-info{
-      background:#ffffff0d;
-      border:1px solid #ffffff18;
-      border-radius:18px;
-      padding:14px;
-      margin:12px 0;
-      line-height:1.8;
-    }
-
-    .pay-info p{
-      margin:0;
-      color:#cbd5e1;
-    }
-
-    .pay-info b{
-      color:#86efac;
-    }
-
-    .pay-warning{
-      color:#facc15!important;
-      font-weight:800;
-      margin-top:8px;
-    }
-
-    .pay-actions{
-      display:grid;
-      gap:10px;
-      margin-top:14px;
-    }
-
-    .pay-actions button,
-    .pay-actions a{
-      border:none;
-      text-align:center;
-      text-decoration:none;
-      padding:13px;
-      border-radius:16px;
-      color:white;
-      font-weight:900;
-      cursor:pointer;
-    }
-
-    .copy-btn{
-      background:linear-gradient(135deg,#2563eb,#9333ea);
-    }
-
-    .close-pay{
-      background:#334155;
-    }
-
-    .zalo-pay{
-      background:linear-gradient(135deg,#0068ff,#00b4ff);
-    }
-
-    .telegram-pay{
-      background:linear-gradient(135deg,#229ED9,#2563eb);
-    }
-
-    @media(max-width:420px){
-      .payment-box{
-        padding:18px;
-        border-radius:24px;
-      }
-
-      .qr-img{
-        max-width:240px;
-      }
-    }
-
   </style>
 </head>
 
 <body>
-  <div class="bg-grid"></div>
-
-  <div class="notice-overlay" id="adminNotice">
-    <div class="notice-box">
-      <h2>📢 Thông báo</h2>
-      <p id="noticeText"></p>
-      <button class="notice-close" onclick="closeNotice()">Đóng</button>
-    </div>
-  </div>
-
   <header>
-    <div class="nav">
-      <div class="logo">LAPBUFFXU</div>
-      <div class="links">
-        <a href="#download">Link tải</a>
-        <a href="#telegram-bot">Bot Telegram</a>
-        <a href="#vip">Bảng giá</a>
-        <a href="#video">Video</a>
-        <a href="#service">Dịch vụ</a>
-      </div>
-    </div>
+    <div class="logo">TienIch<span>Hub</span></div>
+    <nav>
+      <a href="#">Trang chủ</a>
+      <a href="#tools">Tiện ích</a>
+      <a href="#">Liên hệ</a>
+    </nav>
   </header>
 
-  <main class="container">
-    <section class="hero">
-      <div>
-        <div class="badge">● WEBSITE CHÍNH THỨC</div>
-        <h1>LAPBUFFXU.SITE<br><span>Uy Tín - Chất Lượng - An Toàn - Bảo Mật</span></h1>
-        <p>
-          Chọn đúng phiên bản ADR1 / ADR2 / iOS / PC để tránh mua nhầm key.
-        
-        </p>
-        <div class="actions">
-          <a href="#vip" class="btn primary">Xem phiên bản</a>
-          <a href="#download" class="btn secondary">Link tải</a>
-        </div>
+  <section class="hero">
+    <h1>Trung tâm <span>tiện ích online</span></h1>
+    <p>
+      Tổng hợp nhiều công cụ hữu ích cho học tập, công việc, tài chính và đời sống.
+      Chọn tiện ích bên dưới để sử dụng nhanh chóng.
+    </p>
+
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Tìm tiện ích: QR, GPA, mật khẩu, chi tiêu..." onkeyup="searchTools()" />
+      <button>Tìm kiếm</button>
+    </div>
+  </section>
+
+  <main class="container" id="tools">
+    <details open>
+      <summary>📌 Tiện ích phổ biến</summary>
+      <div class="tools-grid">
+        <a href="tools/qr.html" class="tool-card" data-name="qr mã qr link text">
+          <div class="icon">🔳</div>
+          <h3>Tạo mã QR</h3>
+          <p>Chuyển link hoặc văn bản thành mã QR nhanh chóng.</p>
+          <span class="tag">Công cụ</span>
+        </a>
+
+        <a href="tools/password.html" class="tool-card" data-name="mật khẩu password bảo mật">
+          <div class="icon">🔐</div>
+          <h3>Tạo mật khẩu mạnh</h3>
+          <p>Tạo mật khẩu an toàn, khó đoán để bảo vệ tài khoản.</p>
+          <span class="tag">Bảo mật</span>
+        </a>
+
+        <a href="tools/text-counter.html" class="tool-card" data-name="đếm chữ ký tự văn bản">
+          <div class="icon">📝</div>
+          <h3>Đếm ký tự</h3>
+          <p>Đếm số chữ, ký tự và dòng trong đoạn văn bản.</p>
+          <span class="tag">Văn bản</span>
+        </a>
       </div>
+    </details>
 
-      <div class="hero-card">
-        <div class="circle one"></div>
-        <div class="circle two"></div>
+    <details>
+      <summary>🎓 Học tập</summary>
+      <div class="tools-grid">
+        <a href="tools/gpa.html" class="tool-card" data-name="gpa điểm học lực đại học">
+          <div class="icon">🎓</div>
+          <h3>Tính GPA</h3>
+          <p>Tính điểm trung bình, xếp loại học lực theo tín chỉ.</p>
+          <span class="tag">Sinh viên</span>
+        </a>
 
-        <div class="showcase-top">
-          <span>LAPBUFFXU.SITE</span>
-          <b>VIP</b>
-        </div>
-
-        <div class="showcase-title">
-          <h2>/h2>
-          <p>ADR1 • ADR2 • iOS • PC</p>
-        </div>
-
-        <div class="mini-grid">
-          <div class="mini-card">
-            <strong>ADR1 / ADR2 / iOS / PC</strong>
-            <span>Mỗi phiên bản có link tải và bảng giá riêng.</span>
-          </div>
-          <div class="mini-card">
-            <strong>Cập nhật liên tục</strong>
-            <span>Luôn hỗ trợ phiên bản mới nhất.</span>
-          </div>
-        </div>
+        <a href="tools/final-score.html" class="tool-card" data-name="điểm cuối kỳ cần bao nhiêu qua môn">
+          <div class="icon">📊</div>
+          <h3>Tính điểm cần đạt</h3>
+          <p>Biết cần bao nhiêu điểm cuối kỳ để qua môn.</p>
+          <span class="tag">Học tập</span>
+        </a>
       </div>
-    </section>
+    </details>
 
-    <section id="download">
-      <div class="section-title">
-        <h2>Link tải</h2>
-        <p>Chọn đúng phiên bản cần dùng. ADR1 và ADR2 là 2 bản khác nhau, tải nhầm có thể mua nhầm key.</p>
+    <details>
+      <summary>💰 Tài chính</summary>
+      <div class="tools-grid">
+        <a href="tools/expense.html" class="tool-card" data-name="quản lý chi tiêu tiền sinh viên">
+          <div class="icon">💸</div>
+          <h3>Quản lý chi tiêu</h3>
+          <p>Theo dõi tiền ăn, xăng, học phí và số tiền còn lại.</p>
+          <span class="tag">Tài chính</span>
+        </a>
+
+        <a href="tools/split-bill.html" class="tool-card" data-name="chia tiền hóa đơn đi ăn nhóm">
+          <div class="icon">🧾</div>
+          <h3>Chia tiền nhóm</h3>
+          <p>Nhập hóa đơn và số người để chia tiền nhanh.</p>
+          <span class="tag">Tiện ích</span>
+        </a>
       </div>
+    </details>
 
-      <div class="grid">
-        <div class="card">
-          <div class="icon">🎣</div>
-          <h3>ADR1</h3>
-          <p>Phiên Bản ADR Câu Cá - Đập Đá - Bắt Bọ.</p>
-          <a href="https://www.mediafire.com/file/3peqfl7e0d3zdry/PlayHGVTeam_2.27.1.apk/file" target="_blank" class="btn primary">Tải ADR1</a>
-        </div>
+    <details>
+      <summary>⚙️ Công cụ khác</summary>
+      <div class="tools-grid">
+        <a href="tools/image-compress.html" class="tool-card" data-name="nén ảnh giảm dung lượng">
+          <div class="icon">🖼️</div>
+          <h3>Nén ảnh</h3>
+          <p>Giảm dung lượng ảnh trước khi gửi hoặc đăng mạng xã hội.</p>
+          <span class="tag">Hình ảnh</span>
+        </a>
 
-        <div class="card">
-          <div class="icon">🚀</div>
-          <h3>ADR2</h3>
-          <p>Phiên Bản Full Chức Năng - Mini Game - Dò Map Trống.</p>
-          <a href="https://app.mediafire.com/folder/zuzsysvc1veb2/ADR+M%E1%BB%9AI+NH%E1%BA%A4T" target="_blank" class="btn primary">Tải ADR2</a>
-        </div>
-
-        <div class="card">
-          <div class="icon">🍎</div>
-          <h3>iOS</h3>
-          <p>Phiên bản iOS cần liên hệ admin để được hướng dẫn cài.</p>
-          <a href="https://zalo.me/0357971728" target="_blank" class="btn primary">Liên hệ</a>
-        </div>
-
-        <div class="card">
-          <div class="icon">💻</div>
-          <h3>PC</h3>
-          <p>Phiên bản dành cho PC / giả lập.</p>
-          <a href="https://www.mediafire.com/folder/400s18qtwsp0y/module" target="_blank" class="btn primary">Tải PC</a>
-        </div>
+        <a href="tools/unit-converter.html" class="tool-card" data-name="đổi đơn vị chuyển đổi">
+          <div class="icon">📏</div>
+          <h3>Đổi đơn vị</h3>
+          <p>Chuyển đổi đơn vị chiều dài, cân nặng, thời gian.</p>
+          <span class="tag">Công cụ</span>
+        </a>
       </div>
-    </section>
-
-    <!-- ===== TELEGRAM BOT SECTION ===== -->
-    <section id="telegram-bot" style="margin:80px 0;">
-      <div style="
-        background: linear-gradient(135deg, #229ED9 0%, #0088cc 100%);
-        border-radius: 36px;
-        padding: 48px 28px;
-        text-align: center;
-        box-shadow: 0 20px 60px rgba(34, 158, 217, 0.3);
-        border: 2px solid rgba(255, 255, 255, 0.2);
-        position: relative;
-        overflow: hidden;
-      ">
-        <div style="position: absolute; inset: 0; opacity: 0.1; background: radial-gradient(circle at 20% 50%, white, transparent 50%), radial-gradient(circle at 80% 80%, white, transparent 50%);"></div>
-        
-        <div style="position: relative; z-index: 2;">
-          <h2 style="font-size: 42px; margin-bottom: 16px; color: white; text-shadow: 0 2px 8px rgba(0,0,0,0.2);">
-            🤖 Bot Bán Hàng Tự Động
-          </h2>
-          
-          <p style="font-size: 18px; color: rgba(255,255,255,0.95); margin-bottom: 28px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.7;">
-            Chat trực tiếp với bot Telegram của chúng tôi để xem giá, thanh toán và liên hệ admin nhận key. Shop chỉ bán key, không có key miễn phí.
-          </p>
-
-          <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px;">
-            <div style="background: rgba(255,255,255,0.2); padding: 12px 20px; border-radius: 20px; color: white; font-weight: 800; border: 1px solid rgba(255,255,255,0.4);">
-              ✅ Tư vấn 24/7
-            </div>
-            <div style="background: rgba(255,255,255,0.2); padding: 12px 20px; border-radius: 20px; color: white; font-weight: 800; border: 1px solid rgba(255,255,255,0.4);">
-              ⚡ Phản hồi tức thì
-            </div>
-            <div style="background: rgba(255,255,255,0.2); padding: 12px 20px; border-radius: 20px; color: white; font-weight: 800; border: 1px solid rgba(255,255,255,0.4);">
-              💰 Shop chỉ bán key
-            </div>
-          </div>
-
-          <a href="https://t.me/lapbuffxu_bot" target="_blank" style="
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 16px 32px;
-            background: white;
-            color: #0088cc;
-            text-decoration: none;
-            border-radius: 20px;
-            font-weight: 950;
-            font-size: 18px;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-            transition: transform 0.25s, box-shadow 0.25s;
-            hover: {
-              transform: translateY(-3px);
-              box-shadow: 0 12px 35px rgba(0,0,0,0.3);
-            }
-          " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 12px 35px rgba(0,0,0,0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.2)';">
-            💬 Vào Chat Bot Ngay
-          </a>
-
-          <div style="margin-top: 20px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
-            <a href="https://t.me/LAPBUFFXU" target="_blank" style="
-              padding: 10px 18px;
-              background: rgba(255,255,255,0.15);
-              color: white;
-              text-decoration: none;
-              border-radius: 16px;
-              font-weight: 800;
-              font-size: 14px;
-              border: 1px solid rgba(255,255,255,0.3);
-              transition: 0.25s;
-            " onmouseover="this.style.background='rgba(255,255,255,0.25)'; this.style.borderColor='rgba(255,255,255,0.6)';" onmouseout="this.style.background='rgba(255,255,255,0.15)'; this.style.borderColor='rgba(255,255,255,0.3)';">
-              📢 Nhóm Thông Báo
-            </a>
-            <a href="https://lapbuffxu.site" target="_blank" style="
-              padding: 10px 18px;
-              background: rgba(255,255,255,0.15);
-              color: white;
-              text-decoration: none;
-              border-radius: 16px;
-              font-weight: 800;
-              font-size: 14px;
-              border: 1px solid rgba(255,255,255,0.3);
-              transition: 0.25s;
-            " onmouseover="this.style.background='rgba(255,255,255,0.25)'; this.style.borderColor='rgba(255,255,255,0.6)';" onmouseout="this.style.background='rgba(255,255,255,0.15)'; this.style.borderColor='rgba(255,255,255,0.3)';">
-              🌐 Website
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="vip">
-      <div class="section-title">
-        <h2>Bảng Giá KEY VIP</h2>
-        <p class="note">Bấm đúng phiên bản cần mua: ADR1 và ADR2 là 2 bản khác nhau, không nên mua lẫn.</p>
-      </div>
-
-      <div class="grid">
-        <div class="card version-card" onclick="openPanel('adr1Panel')">
-          <div class="icon">🎣</div>
-          <h3>ADR1</h3>
-          <div class="tag-row">
-            <span class="tag">Câu Cá</span>
-            <span class="tag">Đập Đá</span>
-            <span class="tag">Bắt Bọ</span>
-          </div>
-          <p>Bản cơ bản dành cho Android / máy ảo Android. PC dùng chung key với bản này.</p>
-          <button class="btn primary">XEM GIÁ ADR1</button>
-        </div>
-
-        <div class="card version-card" onclick="openPanel('adr2Panel')">
-          <div class="icon">🚀</div>
-          <h3>ADR2</h3>
-          <div class="tag-row">
-            <span class="tag">Mini Game</span>
-            <span class="tag">Dò Map</span>
-            <span class="tag">Full Chức Năng</span>
-          </div>
-          <p>Bản nhiều chức năng hơn. Key ADR2 dùng riêng cho bản ADR2.</p>
-          <button class="btn primary">XEM GIÁ ADR2</button>
-        </div>
-
-        <div class="card version-card" onclick="openPanel('iosPanel')">
-          <div class="icon">🍎</div>
-          <h3>iOS</h3>
-          <div class="tag-row">
-            <span class="tag">1 thiết bị</span>
-            <span class="tag">Tuần / Tháng</span>
-          </div>
-          <p>Dành cho khách dùng iPhone hoặc iPad.</p>
-          <button class="btn primary">XEM GIÁ iOS</button>
-        </div>
-
-        <div class="card version-card" onclick="openPanel('pcPanel')">
-          <div class="icon">💻</div>
-          <h3>PC</h3>
-          <div class="tag-row">
-            <span class="tag">1 thiết bị</span>
-            <span class="tag">Ngày / Tháng</span>
-          </div>
-          <p>Dành cho khách dùng PC hoặc giả lập.</p>
-          <button class="btn primary">XEM GIÁ PC</button>
-        </div>
-      </div>
-
-      <div class="panel" id="adr1Panel">
-        <div class="panel-head">
-          <div>
-            <h2>🎣 ADR1 - Câu Cá / Đập Đá / Bắt Bọ</h2>
-            <p>Bản ADR cơ bản. Hãy tải đúng ADR1 trước khi mua key để tránh nhầm bản.</p>
-          </div>
-          <button class="btn secondary" onclick="closePanels()">Đóng bảng</button>
-        </div>
-
-        <div class="card">
-          <div class="icon">🎣</div>
-          <h3>Phiên Bản ADR Câu Cá - Đập Đá - Bắt Bọ</h3>
-          <p>Bản ADR1 cơ bản dành cho câu cá, đập đá và bắt bọ.</p>
-
-          <div class="grid">
-            <div class="card">
-              <h3>ADR1 - Key 1 ngày</h3>
-              <div class="stock">✅ Còn hàng</div>
-              <div class="price">10.000đ</div>
-              <p>Loại: ADR1 / Android / 1 thiết bị</p>
-              <button class="btn primary" onclick="openPayment('Phiên Bản ADR Câu Cá - Đập Đá - Bắt Bọ - Key 1 ngày', 10000)">Thanh toán ADR1</button>
-            </div>
-
-            <div class="card">
-              <h3>ADR1 - Key 7 ngày</h3>
-              <div class="stock">✅ Còn hàng</div>
-              <div class="price">50.000đ</div>
-              <p>Loại: ADR1 / Android / 1 thiết bị</p>
-              <button class="btn primary" onclick="openPayment('Phiên Bản ADR Câu Cá - Đập Đá - Bắt Bọ - Key 7 ngày', 50000)">Thanh toán ADR1</button>
-            </div>
-
-            <div class="card">
-              <h3>ADR1 - Key 14 ngày</h3>
-              <div class="stock">✅ TẠM HẾT</div>
-              <div class="price">80.000đ</div>
-              <p>Loại: ADR1 / Android / 1 thiết bị</p>
-              <button class="btn primary disabled" disabled>Tạm hết hàng</button>
-            </div>
-
-            <div class="card">
-              <h3>ADR1 - Key 30 ngày</h3>
-              <div class="stock">✅ Còn hàng</div>
-              <div class="price">150.000đ</div>
-              <p>Loại: ADR1 / Android / 1 thiết bị</p>
-              <button class="btn primary" onclick="openPayment('Phiên Bản ADR Câu Cá - Đập Đá - Bắt Bọ - Key 30 ngày', 150000)">Thanh toán ADR1</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="panel" id="adr2Panel">
-        <div class="panel-head">
-          <div>
-            <h2>🚀 ADR2 - Full Chức Năng</h2>
-            <p>Bản ADR2 nhiều chức năng hơn. Key ADR2 dùng riêng cho ADR2, không nên mua nhầm sang ADR1.</p>
-          </div>
-          <button class="btn secondary" onclick="closePanels()">Đóng bảng</button>
-        </div>
-
-        <div class="card">
-          <div class="icon">🚀</div>
-          <h3>Phiên Bản ADR Full Chức Năng - Mini Game - Dò Map Trống</h3>
-          <p>Bản ADR2 phù hợp khách cần nhiều chức năng hơn.</p>
-
-          <div class="grid">
-
-            <div class="card">
-              <h3>ADR2 - Key 1 ngày</h3>
-              <div class="stock">✅ Còn hàng</div>
-              <div class="price">15.000đ</div>
-              <p>Loại: ADR2 / Android / 1 thiết bị</p>
-              <button class="btn primary" onclick="openPayment('Phiên Bản ADR Full Chức Năng - Key 1 ngày', 15000)">Thanh toán ADR2</button>
-            </div>
-
-            <div class="card">
-              <h3>ADR2 - Key 7 ngày</h3>
-              <div class="stock">✅ Còn hàng</div>
-              <div class="price">80.000đ</div>
-              <p>Loại: ADR2 / Android / 1 thiết bị</p>
-              <button class="btn primary" onclick="openPayment('Phiên Bản ADR Full Chức Năng - Key 7 ngày', 80000)">Thanh toán ADR2</button>
-            </div>
-
-            <div class="card">
-              <h3>ADR2 - Key 30 ngày</h3>
-              <div class="stock">✅ Còn hàng</div>
-              <div class="price">150.000đ</div>
-              <p>Loại: ADR2 / Android / 1 thiết bị</p>
-              <button class="btn primary" onclick="openPayment('Phiên Bản ADR Full Chức Năng - Key 30 ngày', 150000)">Thanh toán ADR2</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="panel" id="iosPanel">
-        <div class="panel-head">
-          <div>
-            <h2>🍎 iOS</h2>
-            <p>Bảng giá dành cho iOS. Khách cần liên hệ admin để được hỗ trợ cài đặt.</p>
-          </div>
-          <button class="btn secondary" onclick="closePanels()">Đóng bảng</button>
-        </div>
-
-        <div class="grid">
-          <div class="card">
-            <div class="icon">🍎</div>
-            <h3>iOS - Key 1 tuần</h3>
-            <div class="stock">✅ Còn hàng</div>
-            <div class="price">100.000đ</div>
-            <p>Loại: iOS / 1 thiết bị</p>
-            <button class="btn primary" onclick="openPayment('iOS - Key 1 tuần', 100000)">Thanh toán ngay</button>
-          </div>
-
-          <div class="card">
-            <div class="icon">🍎</div>
-            <h3>iOS - Key 1 tháng</h3>
-            <div class="stock">✅ Còn hàng</div>
-            <div class="price">260.000đ</div>
-            <p>Loại: iOS / 1 thiết bị</p>
-            <button class="btn primary" onclick="openPayment('iOS - Key 1 tháng', 260000)">Thanh toán ngay</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="panel" id="pcPanel">
-        <div class="panel-head">
-          <div>
-            <h2>💻 PC</h2>
-            <p>PC dùng chung key với ADR1 Câu Cá - Đập Đá - Bắt Bọ. Hiện tại chỉ bán key 1 thiết bị.</p>
-          </div>
-          <button class="btn secondary" onclick="closePanels()">Đóng bảng</button>
-        </div>
-
-        <div class="card">
-          <div class="icon">💻</div>
-          <h3>PC / Giả lập - Câu Cá - Đập Đá - Bắt Bọ</h3>
-          <p>Key PC và ADR1 bản cơ bản dùng chung được.</p>
-
-          <div class="grid">
-            <div class="card">
-              <h3>PC - Key 1 ngày</h3>
-              <div class="stock">✅ Còn hàng</div>
-              <div class="price">10.000đ</div>
-              <p>Loại: PC / 1 thiết bị</p>
-              <button class="btn primary" onclick="openPayment('PC - Key 1 ngày', 10000)">Thanh toán ngay</button>
-            </div>
-
-            <div class="card">
-              <h3>PC - Key 7 ngày</h3>
-              <div class="stock">✅ Còn hàng</div>
-              <div class="price">50.000đ</div>
-              <p>Loại: PC / 1 thiết bị</p>
-              <button class="btn primary" onclick="openPayment('PC - Key 7 ngày', 50000)">Thanh toán ngay</button>
-            </div>
-
-            <div class="card">
-              <h3>PC - Key 14 ngày</h3>
-              <div class="stock">✅ TẠM HẾT</div>
-              <div class="price">80.000đ</div>
-              <p>Loại: PC / 1 thiết bị</p>
-              <button class="btn primary disabled" disabled>Tạm hết hàng</button>
-            </div>
-
-            <div class="card">
-              <h3>PC - Key 1 tháng</h3>
-              <div class="stock">✅ Còn hàng</div>
-              <div class="price">150.000đ</div>
-              <p>Loại: PC / 1 thiết bị</p>
-              <button class="btn primary" onclick="openPayment('PC - Key 1 tháng', 150000)">Thanh toán ngay</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="video">
-      <div class="section-title">
-        <h2>Video hướng dẫn</h2>
-        <p>Web có 2 video hướng dẫn riêng cho 2 phiên bản ADR</p>
-      </div>
-
-      <div class="grid">
-        <div class="card">
-          <div class="icon">🎣</div>
-          <h3>Video hướng dẫn</h3>
-          <p><b>Phiên Bản ADR Câu Cá - Đập Đá - Bắt Bọ</b></p>
-
-          <div class="video-box">
-            <video controls>
-              <source src="adr-cau-ca-dap-da-bat-bo.mp4" type="video/mp4" />
-            </video>
-          </div>
-
-          <p style="margin-top:14px;color:#94a3b8;">
-            <b> </b>
-          </p>
-        </div>
-
-        <div class="card">
-          <div class="icon">🚀</div>
-          <h3>Video hướng dẫn</h3>
-          <p><b>Phiên Bản ADR Câu Cá - Đập Đá - Bắt Bọ - Mini Game - Dò Map Trống .... Nhiều Chức Năng Khác</b></p>
-
-          <div class="video-box">
-            <video controls>
-              <source src="adr-full-chuc-nang.mp4" type="video/mp4" />
-            </video>
-          </div>
-
-          <p style="margin-top:14px;color:#94a3b8;">
-             <b> </b>
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section id="service">
-      <div class="section-title">
-        <h2>Dịch vụ khác</h2>
-        <p>Các dịch vụ cày thuê hoặc hỗ trợ thêm.</p>
-      </div>
-
-      <div class="grid">
-        <div class="card">
-          <div class="icon">🎮</div>
-          <h3>Cày thuê</h3>
-          <p>Xem chi tiết các gói dịch vụ cày thuê.</p>
-          <a href="cay-thue.html" class="btn primary">Xem thêm</a>
-        </div>
-
-        <div class="card">
-          <div class="icon">🤖</div>
-          <h3>Bot bán hàng tự động</h3>
-          <p>Chat trực tiếp với bot Telegram của chúng tôi để mua key hoặc hỏi đáp thông tin.</p>
-          <a href="https://t.me/lapbuffxu_bot" target="_blank" class="btn primary">Chat với Bot Telegram</a>
-        </div>
-      </div>
-    </section>
+    </details>
   </main>
 
   <footer>
-    © 2026 LAPBUFFXU.SITE - All rights reserved.
+    © 2026 TienIchHub - Website tiện ích online
   </footer>
 
-  <div class="payment-overlay" id="paymentModal">
-    <div class="payment-box">
-      <h2>💳 Thanh toán ngay</h2>
-      <p>Quét QR hoặc chuyển khoản đúng thông tin bên dưới.</p>
-
-      <img id="qrImage" class="qr-img" src="" alt="QR thanh toán">
-
-      <div class="pay-info">
-        <p>Ngân hàng: <b id="bankName">CAKE by VPBank</b></p>
-        <p>Số tài khoản: <b id="accountNumber">0344792471</b></p>
-        <p>Chủ tài khoản: <b id="accountName">HA THI ANH THU</b></p>
-        <p>Gói mua: <b id="payProduct"></b></p>
-        <p>Số tiền: <b id="payAmount"></b></p>
-        <p>Nội dung CK: <b id="payContent"></b></p>
-        <p class="pay-warning">⚠️ Kiểm tra đúng ADR1 / ADR2 / iOS / PC trước khi chuyển khoản. Chuyển đúng nội dung để admin xác nhận nhanh.</p>
-      </div>
-
-      <div class="pay-actions">
-        <button class="copy-btn" onclick="copyPaymentContent()">Sao chép nội dung chuyển khoản</button>
-        <a class="zalo-pay" href="https://zalo.me/0357971728" target="_blank">Tôi đã chuyển khoản - Nhắn Zalo</a>
-        <a class="telegram-pay" href="https://t.me/ethu0208" target="_blank">Tôi đã chuyển khoản - Nhắn Telegram</a>
-        <button class="close-pay" onclick="closePayment()">Đóng</button>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="chat-wrapper">
-    <div class="chat-box" id="chatBox">
-      <h3>Liên hệ admin</h3>
-      <p>Chọn nền tảng để nhắn admin mua key hoặc cần hỗ trợ.</p>
-
-      <a href="https://t.me/ethu0208" target="_blank" class="chat-link telegram">Telegram</a>
-      <a href="https://zalo.me/0357971728" target="_blank" class="chat-link zalo">Zalo</a>
-    </div>
-
-    <button class="chat-toggle" onclick="toggleChat()">💬</button>
-  </div>
-
   <script>
-    const ADMIN_NOTICE_MESSAGE = `Chào mừng bạn đến với LAPBUFFXU.SITE!
+    function searchTools() {
+      const input = document.getElementById("searchInput").value.toLowerCase();
+      const cards = document.querySelectorAll(".tool-card");
 
-THÔNG BÁO:
-- Game Đang Quét Vui Lòng Chơi Tài Khoản Phụ ( Clone)Tránh Rủi Ro Cho Tài Khoản Chính .
-- Website đã nâng cấp giao diện mới.
-- Chọn đúng ADR1 / ADR2 / iOS / PC để xem bảng giá riêng.
-- Hiện tại chỉ bán key 1 thiết bị.
-- Shop KHÔNG có key miễn phí / chơi thử free.
+      cards.forEach(card => {
+        const name = card.getAttribute("data-name").toLowerCase();
+        const title = card.querySelector("h3").innerText.toLowerCase();
+        const text = card.querySelector("p").innerText.toLowerCase();
 
-Muốn mua key thì bấm đúng nút Thanh toán của phiên bản cần mua. ADR1 và ADR2 là 2 bản riêng, nhớ kiểm tra trước khi chuyển khoản nhé.`;
-
-    document.addEventListener("DOMContentLoaded", () => {
-      const notice = document.getElementById("adminNotice");
-      const noticeText = document.getElementById("noticeText");
-
-      noticeText.textContent = ADMIN_NOTICE_MESSAGE;
-      notice.classList.add("active");
-    });
-
-    function closeNotice(){
-      document.getElementById("adminNotice").classList.remove("active");
-    }
-
-    function toggleChat(){
-      document.getElementById("chatBox").classList.toggle("active");
-    }
-
-    function openPanel(panelId){
-      const panels = document.querySelectorAll(".panel");
-
-      panels.forEach(panel => {
-        panel.classList.remove("active");
-      });
-
-      const currentPanel = document.getElementById(panelId);
-      currentPanel.classList.add("active");
-      currentPanel.scrollIntoView({ behavior:"smooth", block:"start" });
-    }
-
-    function closePanels(){
-      const panels = document.querySelectorAll(".panel");
-      panels.forEach(panel => panel.classList.remove("active"));
-    }
-    function openPayment(productName, amount){
-      let prefix = "ORDER";
-      const bankCode = "CAKE";
-      const accountNumber = "0344792471";
-      const accountName = "HA THI ANH THU";
-
-
-if(productName.includes("Câu Cá - Đập Đá - Bắt Bọ") && productName.includes("1 ngày"))
-    prefix = "ADR1-1DAY";
-
-else if(productName.includes("Câu Cá - Đập Đá - Bắt Bọ") && productName.includes("7 ngày"))
-    prefix = "ADR1-7DAY";
-
-else if(productName.includes("Câu Cá - Đập Đá - Bắt Bọ") && productName.includes("14 ngày"))
-    prefix = "ADR1-14DAY";
-
-else if(productName.includes("Câu Cá - Đập Đá - Bắt Bọ") && productName.includes("30 ngày"))
-    prefix = "ADR1-30DAY";
-
-else if(productName.includes("Full Chức Năng") && productName.includes("1 ngày"))
-    prefix = "ADR2-1DAY";
-
-else if(productName.includes("Full Chức Năng") && productName.includes("7 ngày"))
-    prefix = "ADR2-7DAY";
-
-else if(productName.includes("Full Chức Năng") && productName.includes("30 ngày"))
-    prefix = "ADR2-30DAY";
-
-else if(productName.includes("iOS") && productName.includes("1 tuần"))
-    prefix = "IOS-7DAY";
-
-else if(productName.includes("iOS") && productName.includes("1 tháng"))
-    prefix = "IOS-30DAY";
-
-else if(productName.includes("PC") && productName.includes("1 ngày"))
-    prefix = "PC-1DAY";
-
-else if(productName.includes("PC") && productName.includes("7 ngày"))
-    prefix = "PC-7DAY";
-
-else if(productName.includes("PC") && productName.includes("14 ngày"))
-    prefix = "PC-14DAY";
-
-else if(productName.includes("PC") && productName.includes("1 tháng"))
-    prefix = "PC-30DAY";
-
-const orderCode = prefix + "-" + Math.floor(1000 + Math.random() * 9000);
-      document.getElementById("payProduct").textContent = productName;
-      document.getElementById("payAmount").textContent = amount.toLocaleString("vi-VN") + "đ";
-      document.getElementById("payContent").textContent = orderCode;
-
-      const qrUrl =
-        `https://img.vietqr.io/image/${bankCode}-${accountNumber}-compact2.png?amount=${amount}&addInfo=${encodeURIComponent(orderCode)}&accountName=${encodeURIComponent(accountName)}`;
-
-      document.getElementById("qrImage").src = qrUrl;
-      document.getElementById("paymentModal").classList.add("active");
-    }
-
-    function closePayment(){
-      document.getElementById("paymentModal").classList.remove("active");
-    }
-
-    function copyPaymentContent(){
-      const content = document.getElementById("payContent").textContent;
-
-      navigator.clipboard.writeText(content).then(() => {
-        alert("Đã sao chép nội dung chuyển khoản: " + content);
-      }).catch(() => {
-        alert("Nội dung chuyển khoản: " + content);
+        if (name.includes(input) || title.includes(input) || text.includes(input)) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
       });
     }
-
-    document.addEventListener("click", (event) => {
-      const modal = document.getElementById("paymentModal");
-      if(event.target === modal){
-        closePayment();
-      }
-    });
-document.addEventListener("click", (event) => {
-  const modal = document.getElementById("paymentModal");
-  if(event.target === modal){
-    closePayment();
-  }
-});
-
-/* DÁN Ở ĐÂY */
-
-document.addEventListener("contextmenu", function(e){
-  e.preventDefault();
-});
-
-document.addEventListener("keydown", function(e){
-  if(
-    e.key === "F12" ||
-    (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "i") ||
-    (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "j") ||
-    (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "c") ||
-    (e.ctrlKey && e.key.toLowerCase() === "u")
-  ){
-    e.preventDefault();
-    return false;
-  }
-});
-
-document.addEventListener("selectstart", function(e){
-  e.preventDefault();
-});
-
-</script>
+  </script>
 </body>
 </html>

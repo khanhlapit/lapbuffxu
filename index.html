@@ -1,349 +1,481 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tiện Ích Online</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UtilityHub</title>
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: #fff;
-      min-height: 100vh;
-    }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
 
-    header {
-      padding: 22px 8%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(15, 23, 42, 0.9);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      backdrop-filter: blur(12px);
-    }
+body{
+    background:#070707;
+    color:#fff;
+}
 
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-    }
+.app{
+    display:flex;
+    min-height:100vh;
+}
 
-    .logo span {
-      color: #38bdf8;
-    }
+/* SIDEBAR */
 
-    nav a {
-      color: #cbd5e1;
-      text-decoration: none;
-      margin-left: 20px;
-      font-size: 15px;
-    }
+.sidebar{
+    width:270px;
+    background:#0b0b0c;
+    border-right:1px solid #222;
+    padding:25px 18px;
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+}
 
-    nav a:hover {
-      color: #38bdf8;
-    }
+.logo{
+    display:block;
+    text-decoration:none;
+    color:white;
+    font-size:28px;
+    font-weight:900;
+    margin-bottom:35px;
+    padding-left:10px;
+}
 
-    .hero {
-      padding: 70px 8% 40px;
-      text-align: center;
-    }
+.logo span{
+    color:#38bdf8;
+}
 
-    .hero h1 {
-      font-size: 42px;
-      margin-bottom: 15px;
-    }
+.menu-title{
+    color:#666;
+    font-size:12px;
+    font-weight:bold;
+    margin:25px 10px 10px;
+    text-transform:uppercase;
+}
 
-    .hero h1 span {
-      color: #38bdf8;
-    }
+.menu a{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:15px;
+    margin-bottom:8px;
+    border-radius:12px;
+    color:#d4d4d4;
+    text-decoration:none;
+    transition:.2s;
+    font-weight:600;
+}
 
-    .hero p {
-      color: #94a3b8;
-      max-width: 650px;
-      margin: auto;
-      line-height: 1.6;
-    }
+.menu a:hover,
+.menu a.active{
+    background:#1f1f1f;
+    color:#fff;
+}
 
-    .search-box {
-      margin: 30px auto 0;
-      max-width: 600px;
-      display: flex;
-      background: #1e293b;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px;
-      overflow: hidden;
-    }
+/* MAIN */
 
-    .search-box input {
-      flex: 1;
-      padding: 16px;
-      border: none;
-      outline: none;
-      background: transparent;
-      color: white;
-      font-size: 16px;
-    }
+.main{
+    margin-left:270px;
+    width:calc(100% - 270px);
+    padding:30px;
+}
 
-    .search-box button {
-      padding: 0 22px;
-      border: none;
-      background: #38bdf8;
-      color: #0f172a;
-      font-weight: bold;
-      cursor: pointer;
-    }
+/* BANNER */
 
-    .container {
-      padding: 25px 8% 60px;
-    }
+.notice{
+    background:linear-gradient(
+        90deg,
+        rgba(239,68,68,.15),
+        rgba(127,29,29,.12)
+    );
 
-    details {
-      background: #111827;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 18px;
-      margin-bottom: 18px;
-      overflow: hidden;
-    }
+    border:1px solid rgba(239,68,68,.3);
+    border-radius:18px;
+    padding:22px;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    margin-bottom:30px;
+}
 
-    summary {
-      padding: 20px;
-      cursor: pointer;
-      font-size: 20px;
-      font-weight: bold;
-      list-style: none;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+.notice-icon{
+    width:55px;
+    height:55px;
+    background:#ef4444;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:26px;
+}
 
-    summary::after {
-      content: "＋";
-      color: #38bdf8;
-      font-size: 22px;
-    }
+.notice h3{
+    font-size:20px;
+    margin-bottom:6px;
+}
 
-    details[open] summary::after {
-      content: "－";
-    }
+.notice p{
+    color:#d1d5db;
+}
 
-    .tools-grid {
-      padding: 0 20px 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 18px;
-    }
+/* PANEL */
 
-    .tool-card {
-      background: #1e293b;
-      padding: 20px;
-      border-radius: 16px;
-      text-decoration: none;
-      color: white;
-      border: 1px solid rgba(255,255,255,0.06);
-      transition: 0.25s;
-    }
+.panel{
+    background:#0f0f10;
+    border:1px solid #27272a;
+    border-radius:18px;
+    padding:20px;
+    margin-bottom:30px;
+}
 
-    .tool-card:hover {
-      transform: translateY(-5px);
-      border-color: #38bdf8;
-      box-shadow: 0 10px 25px rgba(56,189,248,0.12);
-    }
+.panel-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
 
-    .tool-card .icon {
-      font-size: 32px;
-      margin-bottom: 12px;
-    }
+.panel-head h2{
+    font-size:20px;
+}
 
-    .tool-card h3 {
-      margin-bottom: 8px;
-      font-size: 18px;
-    }
+.badge{
+    background:rgba(245,158,11,.15);
+    color:#fbbf24;
+    padding:8px 14px;
+    border-radius:999px;
+    font-size:13px;
+    font-weight:bold;
+}
 
-    .tool-card p {
-      color: #94a3b8;
-      font-size: 14px;
-      line-height: 1.5;
-    }
+/* SEARCH */
 
-    .tag {
-      display: inline-block;
-      margin-top: 14px;
-      padding: 6px 10px;
-      background: rgba(56,189,248,0.12);
-      color: #38bdf8;
-      border-radius: 999px;
-      font-size: 12px;
-    }
+.search{
+    margin-bottom:25px;
+}
 
-    footer {
-      text-align: center;
-      padding: 25px;
-      color: #64748b;
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
+.search input{
+    width:100%;
+    padding:18px;
+    background:#080808;
+    border:1px solid #27272a;
+    border-radius:14px;
+    color:white;
+    outline:none;
+    font-size:15px;
+}
 
-    @media (max-width: 700px) {
-      header {
-        flex-direction: column;
-        gap: 12px;
-      }
+/* TOOLS */
 
-      nav a {
-        margin: 0 8px;
-      }
+.tools-grid{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(220px,1fr));
+    gap:18px;
+}
 
-      .hero h1 {
-        font-size: 31px;
-      }
+.tool-card{
+    background:#141414;
+    border:1px solid #2e2e2e;
+    border-radius:16px;
+    padding:14px;
+    text-decoration:none;
+    color:white;
+    transition:.2s;
+}
 
-      .search-box {
-        flex-direction: column;
-      }
+.tool-card:hover{
+    transform:translateY(-4px);
+    border-color:#38bdf8;
+}
 
-      .search-box button {
-        padding: 14px;
-      }
-    }
-  </style>
+.tool-img{
+    height:130px;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:50px;
+    margin-bottom:15px;
+    background:linear-gradient(
+        135deg,
+        #1d4ed8,
+        #06b6d4
+    );
+}
+
+.tool-card h3{
+    font-size:16px;
+    line-height:1.4;
+    margin-bottom:12px;
+}
+
+.tool-status{
+    background:white;
+    color:black;
+    border-radius:10px;
+    padding:12px;
+    display:flex;
+    justify-content:space-between;
+    font-size:14px;
+}
+
+.tool-status strong{
+    color:#16a34a;
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(250px,1fr));
+    gap:18px;
+}
+
+.stat{
+    background:#0f0f10;
+    border:1px solid #27272a;
+    border-radius:18px;
+    padding:25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.stat p{
+    color:#9ca3af;
+    margin-bottom:10px;
+}
+
+.stat h2{
+    font-size:32px;
+}
+
+.icon{
+    width:55px;
+    height:55px;
+    background:rgba(56,189,248,.12);
+    color:#38bdf8;
+    border-radius:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+}
+
+footer{
+    margin-top:40px;
+    text-align:center;
+    color:#666;
+}
+
+@media(max-width:900px){
+
+.sidebar{
+    position:relative;
+    width:100%;
+    border:none;
+}
+
+.app{
+    display:block;
+}
+
+.main{
+    margin-left:0;
+    width:100%;
+}
+}
+</style>
 </head>
 
 <body>
-  <header>
-    <div class="logo">TienIch<span>Hub</span></div>
-    <nav>
-      <a href="#">Trang chủ</a>
-      <a href="#tools">Tiện ích</a>
-      <a href="#">Liên hệ</a>
-    </nav>
-  </header>
 
-  <section class="hero">
-    <h1>Trung tâm <span>tiện ích online</span></h1>
-    <p>
-      Tổng hợp nhiều công cụ hữu ích cho học tập, công việc, tài chính và đời sống.
-      Chọn tiện ích bên dưới để sử dụng nhanh chóng.
-    </p>
+<div class="app">
 
-    <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Tìm tiện ích: QR, GPA, mật khẩu, chi tiêu..." onkeyup="searchTools()" />
-      <button>Tìm kiếm</button>
-    </div>
-  </section>
+    <aside class="sidebar">
 
-  <main class="container" id="tools">
-    <details open>
-      <summary>📌 Tiện ích phổ biến</summary>
-      <div class="tools-grid">
-        <a href="tools/qr.html" class="tool-card" data-name="qr mã qr link text">
-          <div class="icon">🔳</div>
-          <h3>Tạo mã QR</h3>
-          <p>Chuyển link hoặc văn bản thành mã QR nhanh chóng.</p>
-          <span class="tag">Công cụ</span>
+        <a href="index.html" class="logo">
+            Utility<span>Hub</span>
         </a>
 
-        <a href="tools/password.html" class="tool-card" data-name="mật khẩu password bảo mật">
-          <div class="icon">🔐</div>
-          <h3>Tạo mật khẩu mạnh</h3>
-          <p>Tạo mật khẩu an toàn, khó đoán để bảo vệ tài khoản.</p>
-          <span class="tag">Bảo mật</span>
-        </a>
+        <div class="menu">
 
-        <a href="tools/text-counter.html" class="tool-card" data-name="đếm chữ ký tự văn bản">
-          <div class="icon">📝</div>
-          <h3>Đếm ký tự</h3>
-          <p>Đếm số chữ, ký tự và dòng trong đoạn văn bản.</p>
-          <span class="tag">Văn bản</span>
-        </a>
-      </div>
-    </details>
+            <a class="active" href="#">
+                🏠 Trang chủ
+            </a>
 
-    <details>
-      <summary>🎓 Học tập</summary>
-      <div class="tools-grid">
-        <a href="tools/gpa.html" class="tool-card" data-name="gpa điểm học lực đại học">
-          <div class="icon">🎓</div>
-          <h3>Tính GPA</h3>
-          <p>Tính điểm trung bình, xếp loại học lực theo tín chỉ.</p>
-          <span class="tag">Sinh viên</span>
-        </a>
+            <a href="#">
+                ⚙️ Công cụ nhanh
+            </a>
 
-        <a href="tools/final-score.html" class="tool-card" data-name="điểm cuối kỳ cần bao nhiêu qua môn">
-          <div class="icon">📊</div>
-          <h3>Tính điểm cần đạt</h3>
-          <p>Biết cần bao nhiêu điểm cuối kỳ để qua môn.</p>
-          <span class="tag">Học tập</span>
-        </a>
-      </div>
-    </details>
+            <a href="#">
+                🎓 Học tập
+            </a>
 
-    <details>
-      <summary>💰 Tài chính</summary>
-      <div class="tools-grid">
-        <a href="tools/expense.html" class="tool-card" data-name="quản lý chi tiêu tiền sinh viên">
-          <div class="icon">💸</div>
-          <h3>Quản lý chi tiêu</h3>
-          <p>Theo dõi tiền ăn, xăng, học phí và số tiền còn lại.</p>
-          <span class="tag">Tài chính</span>
-        </a>
+            <a href="#">
+                💰 Tài chính
+            </a>
 
-        <a href="tools/split-bill.html" class="tool-card" data-name="chia tiền hóa đơn đi ăn nhóm">
-          <div class="icon">🧾</div>
-          <h3>Chia tiền nhóm</h3>
-          <p>Nhập hóa đơn và số người để chia tiền nhanh.</p>
-          <span class="tag">Tiện ích</span>
-        </a>
-      </div>
-    </details>
+            <a href="#">
+                🔐 Bảo mật
+            </a>
 
-    <details>
-      <summary>⚙️ Công cụ khác</summary>
-      <div class="tools-grid">
-        <a href="tools/image-compress.html" class="tool-card" data-name="nén ảnh giảm dung lượng">
-          <div class="icon">🖼️</div>
-          <h3>Nén ảnh</h3>
-          <p>Giảm dung lượng ảnh trước khi gửi hoặc đăng mạng xã hội.</p>
-          <span class="tag">Hình ảnh</span>
-        </a>
+            <a href="#">
+                🖼️ Hình ảnh
+            </a>
 
-        <a href="tools/unit-converter.html" class="tool-card" data-name="đổi đơn vị chuyển đổi">
-          <div class="icon">📏</div>
-          <h3>Đổi đơn vị</h3>
-          <p>Chuyển đổi đơn vị chiều dài, cân nặng, thời gian.</p>
-          <span class="tag">Công cụ</span>
-        </a>
-      </div>
-    </details>
-  </main>
+            <div class="menu-title">
+                THÔNG TIN
+            </div>
 
-  <footer>
-    © 2026 TienIchHub - Website tiện ích online
-  </footer>
+            <a href="#">
+                📄 Chính sách
+            </a>
 
-  <script>
-    function searchTools() {
-      const input = document.getElementById("searchInput").value.toLowerCase();
-      const cards = document.querySelectorAll(".tool-card");
+            <a href="#">
+                📩 Liên hệ
+            </a>
 
-      cards.forEach(card => {
-        const name = card.getAttribute("data-name").toLowerCase();
-        const title = card.querySelector("h3").innerText.toLowerCase();
-        const text = card.querySelector("p").innerText.toLowerCase();
+        </div>
+    </aside>
 
-        if (name.includes(input) || title.includes(input) || text.includes(input)) {
-          card.style.display = "block";
-        } else {
-          card.style.display = "none";
-        }
-      });
-    }
-  </script>
+    <main class="main">
+
+        <div class="notice">
+
+            <div class="notice-icon">
+                ⚡
+            </div>
+
+            <div>
+                <h3>
+                    Kho tiện ích online miễn phí
+                </h3>
+
+                <p>
+                    Tổng hợp các công cụ hữu ích
+                    cho học tập, công việc và đời sống.
+                </p>
+            </div>
+
+        </div>
+
+        <section class="panel">
+
+            <div class="panel-head">
+                <h2>
+                    🔥 Tiện ích nổi bật
+                </h2>
+
+                <span class="badge">
+                    Top tools
+                </span>
+            </div>
+
+            <div class="search">
+                <input
+                    type="text"
+                    placeholder="Tìm tiện ích..."
+                >
+            </div>
+
+            <div class="tools-grid">
+
+                <a class="tool-card" href="#">
+                    <div class="tool-img">🔳</div>
+                    <h3>Tạo mã QR</h3>
+
+                    <div class="tool-status">
+                        <span>Trạng thái</span>
+                        <strong>Sẵn sàng</strong>
+                    </div>
+                </a>
+
+                <a class="tool-card" href="#">
+                    <div class="tool-img">🔐</div>
+                    <h3>Tạo mật khẩu</h3>
+
+                    <div class="tool-status">
+                        <span>Trạng thái</span>
+                        <strong>Sẵn sàng</strong>
+                    </div>
+                </a>
+
+                <a class="tool-card" href="#">
+                    <div class="tool-img">📝</div>
+                    <h3>Đếm ký tự</h3>
+
+                    <div class="tool-status">
+                        <span>Trạng thái</span>
+                        <strong>Sẵn sàng</strong>
+                    </div>
+                </a>
+
+                <a class="tool-card" href="#">
+                    <div class="tool-img">🎓</div>
+                    <h3>Tính GPA</h3>
+
+                    <div class="tool-status">
+                        <span>Trạng thái</span>
+                        <strong>Sẵn sàng</strong>
+                    </div>
+                </a>
+
+            </div>
+
+        </section>
+
+        <div class="stats">
+
+            <div class="stat">
+                <div>
+                    <p>Tổng tiện ích</p>
+                    <h2>4</h2>
+                </div>
+
+                <div class="icon">
+                    ⚙️
+                </div>
+            </div>
+
+            <div class="stat">
+                <div>
+                    <p>Danh mục</p>
+                    <h2>5</h2>
+                </div>
+
+                <div class="icon">
+                    📂
+                </div>
+            </div>
+
+            <div class="stat">
+                <div>
+                    <p>Chi phí</p>
+                    <h2>0đ</h2>
+                </div>
+
+                <div class="icon">
+                    💎
+                </div>
+            </div>
+
+        </div>
+
+        <footer>
+            © 2026 UtilityHub
+        </footer>
+
+    </main>
+
+</div>
+
 </body>
 </html>
